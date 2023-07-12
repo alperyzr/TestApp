@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Pipeline\UrlShorts\Handlers\" />
+    <Folder Include="Pipeline\UserRoles\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>
