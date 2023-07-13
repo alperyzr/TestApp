@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestApp.Core.Application.Roles.ViewModels;
+using TestApp.Core.Application.UserRoles.ViewModels;
 
-
-namespace TestApp.Core.Application.Roles.Queries
+namespace TestApp.Core.Application.UserRoles.Queries
 {
-    public class GetRoleByIdQuery : IRequest<RoleDto>
+    public class GetUserRoleByIdQuery : IRequest<UserRoleDto>
     {
         public int Id { get; set; }
     }

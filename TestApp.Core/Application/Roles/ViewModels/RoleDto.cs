@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApp.Core.Application.Roles.ViewModel
+namespace TestApp.Core.Application.Roles.ViewModels
 {
     public class RoleDto:_BaseDto
     {

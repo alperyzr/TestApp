@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace TestApp.Core.Application.Users.ViewModels
+namespace TestApp.Core.Application.UserRoles.ViewModels
 {
-    public class ListDsUserView : UserDto
+    public class ListDsUserRoleView : UserRoleDto
     {
     }
 }

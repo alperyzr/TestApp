@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.Queries;
-using TestApp.Core.Application.Roles.ViewModel;
+using TestApp.Core.Application.Roles.ViewModels;
 
 namespace TestApp.API.Pipeline.Roles
 {
