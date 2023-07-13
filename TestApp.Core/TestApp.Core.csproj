@@ -12,10 +12,4 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\UrlShorts\Commands\" />
-    <Folder Include="Application\UrlShorts\ViewModels\" />
-    <Folder Include="Application\UrlShorts\Queries\" />
-  </ItemGroup>
-
 </Project>

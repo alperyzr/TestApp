@@ -2,7 +2,6 @@
 using MediatR;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Entities;
-using TestApp.Core.Models;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.Users.Handlers

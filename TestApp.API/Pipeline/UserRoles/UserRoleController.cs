@@ -10,11 +10,11 @@ namespace TestApp.API.Pipeline.UserRoleRoles
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserRoleRoleController : ControllerBase
+    public class UserRoleController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UserRoleRoleController(IMediator mediator)
+        public UserRoleController(IMediator mediator)
         {
             _mediator = mediator;
         }
