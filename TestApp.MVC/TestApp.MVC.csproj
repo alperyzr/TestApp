@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bentas.O2.DynamicLinq" Version="6.0.147" />
+    <PackageReference Include="Bentas.O2.WebExtensions" Version="6.0.150" />
     <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2022.3.1109" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestApp.Service\TestApp.Service.csproj" />
   </ItemGroup>
 
 </Project>

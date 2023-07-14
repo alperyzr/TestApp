@@ -1,9 +1,13 @@
+using Bentas.O2.WebExtensions.Services;
+using TestApp.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddKendo();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped(p => BentasRestService.For<IApiClient>(p,""));
 
 var app = builder.Build();
 
@@ -24,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();

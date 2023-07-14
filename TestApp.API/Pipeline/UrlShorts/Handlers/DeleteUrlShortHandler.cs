@@ -15,7 +15,7 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
 
         public async Task<Unit> Handle(DeleteUrlShortCommand request, CancellationToken cancellationToken)
         {
-            var model = _context.UserRoles.FirstOrDefault(x => x.Id == request.Id);
+            var model = _context.UrlShorts.FirstOrDefault(x => x.Id == request.Id);
 
             if (model == null)
                 return Unit.Value;

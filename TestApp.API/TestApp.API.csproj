@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\TestApp.MVC\TestApp.MVC.csproj" />
     <ProjectReference Include="..\TestApp.Service\TestApp.Service.csproj" />
   </ItemGroup>
 

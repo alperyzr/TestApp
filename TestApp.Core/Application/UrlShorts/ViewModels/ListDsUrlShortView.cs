@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Core.Application.UrlShorts.ViewModels
 {
-    public class ListDsUrlShortView : UrlShortDto
+    public class ListDsUrlShortView : GetUrlShortByIdDto
     {
     }
 }

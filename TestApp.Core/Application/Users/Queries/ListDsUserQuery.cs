@@ -11,5 +11,6 @@ namespace TestApp.Core.Application.Users.Queries
 {
     public class ListDsUserQuery: BDataSourceRequest, IRequest<BDataSourceResult<ListDsUserView>>
     {
-    }
+		public UserFilterView FilterView { get; set; } = new UserFilterView();
+	}
 }

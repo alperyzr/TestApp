@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bentas.O2.Core.Base" Version="6.0.148" />
+    <PackageReference Include="Bentas.O2.Core.Base" Version="6.0.151" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Login\Commands\" />
+    <Folder Include="Application\Login\ViewModels\" />
   </ItemGroup>
 
 </Project>

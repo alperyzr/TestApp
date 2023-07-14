@@ -9,7 +9,7 @@ using TestApp.Core.Application.UrlShorts.ViewModels;
 
 namespace TestApp.Core.Application.UrlShorts.Queries
 {
-    public class GetUrlShortByIdQuery : IRequest<UrlShortDto>
+    public class GetUrlShortByIdQuery : IRequest<GetUrlShortByIdDto>
     {
         public int Id { get; set; }
     }

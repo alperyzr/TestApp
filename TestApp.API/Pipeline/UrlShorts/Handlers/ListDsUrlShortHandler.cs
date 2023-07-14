@@ -29,7 +29,8 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
                UpdatedDate = x.UpdatedDate,
                Url = x.Url,
                UrlKey = x.UrlKey,
-               UserId = x.UserId
+               UserId = x.UserId,
+               UserName = x.User.FirstName + " " + x.User.LastName
             });
 
             var result = await retVal.BToDataSourceResultAsync(request);
