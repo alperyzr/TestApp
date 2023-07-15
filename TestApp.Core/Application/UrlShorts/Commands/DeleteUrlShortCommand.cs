@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Core.Application.UrlShorts.Commands
 {
-    public class DeleteUrlShortCommand : IRequest<Unit>
+    public class DeleteUrlShortCommand : IRequest<ServiceResult<Unit>>
     {
         public int Id { get; set; }
     }

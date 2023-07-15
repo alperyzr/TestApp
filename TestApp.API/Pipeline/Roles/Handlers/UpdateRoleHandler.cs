@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
+using TestApp.Core.Application;
 using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Entities;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.Roles.Handlers
 {
-    public class UpdateRoleHandler : IRequestHandler<UpdateRoleCommand, Unit>
+    public class UpdateRoleHandler : IRequestHandler<UpdateRoleCommand, ServiceResult<Unit>>
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -17,14 +18,14 @@ namespace TestApp.API.Pipeline.Roles.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<Unit>> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
         {
             Role model = _mapper.Map<Role>(request);
             model.Id = request.Id;
 
             _context.Roles.Update(model);
             await _context.SaveChangesAsync();
-            return Unit.Value;
+            return ServiceResult<Unit>.SuccessResult(Unit.Value);
         }
     }
 }

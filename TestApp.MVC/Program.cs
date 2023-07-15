@@ -5,10 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddKendo();
 
+//var DefaultApi = builder.Configuration.GetValue<string>("ApiUrl:DefaultApi");
+
+//builder.Services.AddScoped(sp =>
+//	new HttpClient { BaseAddress = new Uri(DefaultApi) });
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped(p => BentasRestService.For<IApiClient>(p,""));
+//builder.Services.AddScoped(p => BentasRestService.For<IApiClient>());
 
+builder.Services.AddScoped<HttpClient>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

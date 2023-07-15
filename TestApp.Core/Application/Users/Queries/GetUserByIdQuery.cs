@@ -9,7 +9,7 @@ using TestApp.Core.Entities;
 
 namespace TestApp.Core.Application.Users.Queries
 {
-    public class GetUserByIdQuery : IRequest<UserDto>
+    public class GetUserByIdQuery : IRequest<ServiceResult<UserDto>>
     {
         public int Id { get; set; }
     }

@@ -11,10 +11,9 @@ using TestApp.Core.Application.Users.ViewModels;
 
 namespace TestApp.Core.Application.Login.Queries
 {
-	public class LoginQuery : IRequest<UserDto>
+	public class LoginQuery : IRequest<ServiceResult<UserDto>>
 	{
-		[Required(ErrorMessage = "Email alanı boş geçilemez")]
-		[EmailAddress]
+		[Required(ErrorMessage = "Email alanı boş geçilemez")]		
 		[DisplayName("Email")]
 		public string Email { get; set; }
 

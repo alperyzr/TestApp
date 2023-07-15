@@ -4,19 +4,30 @@ using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using TestApp.MVC.Security;
 using TestApp.Core.Application.Login.Queries;
+using TestApp.Core.Application.Users.Commands;
+using MediatR;
 
 namespace TestApp.API.Pipeline.Login
 {
+	[Route("api/[controller]")]
+	[ApiController]
 	public class LoginController : Controller
 	{
-		
-		[HttpPost]
-		[Route("/login")]
-		public async Task<IActionResult> Login(LoginQuery loginReqest)
-		{
-			return Ok();
+		private readonly IMediator _mediator;
 
+		public LoginController(IMediator mediator)
+		{
+			_mediator = mediator;
 		}
 
+		[HttpPost]
+		[Route("login")]
+		public async Task<IActionResult> Login([FromBody] LoginQuery req)
+		{
+			var model = await _mediator.Send(req);
+			return Ok(model);
+
+		}
+		
 	}
 }

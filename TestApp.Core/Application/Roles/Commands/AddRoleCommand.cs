@@ -9,7 +9,7 @@ using TestApp.Core.Application.Roles.ViewModels;
 
 namespace TestApp.Core.Application.Roles.Commands
 {
-    public class AddRoleCommand : RoleDto, IRequest<int>
+    public class AddRoleCommand : RoleDto, IRequest<ServiceResult<RoleDto>>
     {
     }
 }

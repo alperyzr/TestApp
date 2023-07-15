@@ -9,7 +9,7 @@ using TestApp.Core.Application.Roles.ViewModels;
 
 namespace TestApp.Core.Application.Roles.Queries
 {
-    public class GetRoleByIdQuery : IRequest<RoleDto>
+    public class GetRoleByIdQuery : IRequest<ServiceResult<RoleDto>>
     {
         public int Id { get; set; }
     }

@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
+using TestApp.Core.Application;
 using TestApp.Core.Application.UrlShorts.Commands;
 using TestApp.Core.Entities;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.UrlShorts.Handlers
 {
-    public class UpdateUrlShortHandler : IRequestHandler<UpdateUrlShortCommand, Unit>
+    public class UpdateUrlShortHandler : IRequestHandler<UpdateUrlShortCommand, ServiceResult<Unit>>
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -17,14 +18,19 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateUrlShortCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<Unit>> Handle(UpdateUrlShortCommand request, CancellationToken cancellationToken)
         {
             UrlShort model = _mapper.Map<UrlShort>(request);
             model.Id = request.Id;
 
-            _context.UrlShorts.Update(model);
+            var chechData = await _context.UrlShorts.FindAsync(model.Id);
+            if (chechData == null)
+				return ServiceResult<Unit>.WarningResult(Unit.Value,"Kayıt bulunamadı");
+
+
+			_context.UrlShorts.Update(model);
             await _context.SaveChangesAsync();
-            return Unit.Value;
+            return ServiceResult<Unit>.SuccessResult(Unit.Value);
         }
     }
 }

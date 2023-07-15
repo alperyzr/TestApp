@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Core.Application.Users.Commands
 {
-    public class DeleteUserCommand: IRequest<Unit>
+    public class DeleteUserCommand: IRequest<ServiceResult<Unit>>
     {
         public int Id { get; set; }
     }

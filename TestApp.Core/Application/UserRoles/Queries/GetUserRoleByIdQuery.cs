@@ -8,7 +8,7 @@ using TestApp.Core.Application.UserRoles.ViewModels;
 
 namespace TestApp.Core.Application.UserRoles.Queries
 {
-    public class GetUserRoleByIdQuery : IRequest<GetUserRoleByIdDto>
+    public class GetUserRoleByIdQuery : IRequest<ServiceResult<GetUserRoleByIdDto>>
     {
         public int Id { get; set; }
     }

@@ -8,7 +8,7 @@ using TestApp.Core.Application.Users.ViewModels;
 
 namespace TestApp.Core.Application.Users.Commands
 {
-    public class AddUserCommand : UserDto, IRequest<int>
+    public class AddUserCommand : UserDto, IRequest<ServiceResult<UserDto>>
     {
     }
 }

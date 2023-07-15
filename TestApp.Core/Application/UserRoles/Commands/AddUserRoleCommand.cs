@@ -8,7 +8,7 @@ using TestApp.Core.Application.UserRoles.ViewModels;
 
 namespace TestApp.Core.Application.UserRoles.Commands
 {
-    public class AddUserRoleCommand : UserRoleDto, IRequest<int>
+    public class AddUserRoleCommand : UserRoleDto, IRequest<ServiceResult<UserRoleDto>>
     {
     }
 }

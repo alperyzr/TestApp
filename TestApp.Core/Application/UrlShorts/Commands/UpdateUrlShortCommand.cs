@@ -8,7 +8,7 @@ using TestApp.Core.Application.UrlShorts.ViewModels;
 
 namespace TestApp.Core.Application.UrlShorts.Commands
 {
-    public class UpdateUrlShortCommand : UrlShortDto, IRequest<Unit>
+    public class UpdateUrlShortCommand : UrlShortDto, IRequest<ServiceResult<Unit>>
     {
         public int Id { get; set; }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Core.Application.Roles.Commands
 {
-    public class DeleteRoleCommand : IRequest<Unit>
+    public class DeleteRoleCommand : IRequest<ServiceResult<Unit>>
     {
         public int Id { get; set; }
     }

@@ -9,7 +9,7 @@ using TestApp.Core.Application.UserRoles.ViewModels;
 
 namespace TestApp.Core.Application.UrlShorts.Commands
 {
-    public class AddUrlShortCommand : UrlShortDto, IRequest<int>
+    public class AddUrlShortCommand : UrlShortDto, IRequest<ServiceResult<UrlShortDto>>
     {
     }
 }

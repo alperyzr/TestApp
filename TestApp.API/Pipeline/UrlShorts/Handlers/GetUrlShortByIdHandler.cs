@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TestApp.Core.Application;
 using TestApp.Core.Application.UrlShorts.Queries;
 using TestApp.Core.Application.UrlShorts.ViewModels;
 using TestApp.Core.Application.UserRoles.Queries;
@@ -12,7 +13,7 @@ using TestApp.Repository;
 namespace TestApp.API.Pipeline.UrlShorts.Handlers
 {  
 
-    public class GetUrlShortByIdHandler : IRequestHandler<GetUrlShortByIdQuery, GetUrlShortByIdDto>
+    public class GetUrlShortByIdHandler : IRequestHandler<GetUrlShortByIdQuery, ServiceResult<GetUrlShortByIdDto>>
     {
         private readonly AppDbContext _comtext;
         private readonly IMapper _mapper;
@@ -23,7 +24,7 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
             _mapper = mapper;
         }
       
-        public async Task<GetUrlShortByIdDto> Handle(GetUrlShortByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<GetUrlShortByIdDto>> Handle(GetUrlShortByIdQuery request, CancellationToken cancellationToken)
         {
             var model = await _comtext.UrlShorts.Include(x => x.User).Select(x=> new GetUrlShortByIdDto
             {
@@ -41,8 +42,11 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
                 UpdatedDate = x.UpdatedDate
             }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
+            if (model == null)
+                return ServiceResult<GetUrlShortByIdDto>.WarningResult(null, "Kayıt bulunamadı");
+            
             var response = _mapper.Map<GetUrlShortByIdDto>(model);
-            return response;
-        }
+            return ServiceResult<GetUrlShortByIdDto>.SuccessResult(response);
+		}
     }
 }

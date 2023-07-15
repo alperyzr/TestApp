@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using TestApp.Core.Application;
 using TestApp.Core.Application.Login.Queries;
+using TestApp.Core.Application.Users.ViewModels;
+using TestApp.MVC.Extentions;
 using TestApp.MVC.Models;
 using TestApp.Service;
 
@@ -7,11 +11,14 @@ namespace TestApp.MVC.Controllers
 {
 	public class LoginController : Controller
 	{
-		private readonly IApiClient apiClient;
+		private readonly HttpClient _httpClient;
+		private readonly IConfiguration _configuration;		
+		private string ApiUrl => _configuration["ApiUrl"];
 
-		public LoginController(IApiClient apiClient)
+		public LoginController(HttpClient httpClient, IConfiguration configuration)
 		{
-			this.apiClient = apiClient;
+			_httpClient = httpClient;
+			_configuration = configuration;
 		}
 
 
@@ -24,13 +31,11 @@ namespace TestApp.MVC.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Index(LoginQuery loginModel)
 		{
-			var response = await apiClient.Login(loginModel);
-			if (response == null)
-			{
-				return View();
-			}
+			var model = await _httpClient.CustomPostAsync<ServiceResult<UserDto>>($"{ApiUrl}/login/login", loginModel);
+			if (model.Code != "200")
+				return View(model);
 			return RedirectToAction("Index", "Home");
-
+			
 		}
 
 
