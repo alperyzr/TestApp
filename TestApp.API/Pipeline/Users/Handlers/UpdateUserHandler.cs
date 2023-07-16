@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
+using TestApp.Core.Application;
+using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Commands;
+using TestApp.Core.Application.Users.ViewModels;
 using TestApp.Core.Entities;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.Users.Handlers
 {
-    public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, Unit>
+    public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, ServiceResult<UserDto>>
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -17,14 +20,19 @@ namespace TestApp.API.Pipeline.Users.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<UserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             User model = _mapper.Map<User>(request);
             model.Id = request.Id;
 
-            _context.Users.Update(model);
+			var chechData = await _context.Users.FindAsync(request.Id);
+			
+			if (chechData == null)
+				return ServiceResult<UserDto>.WarningResult(null, "Kullanıcı Bulunamadı");
+
+			_context.Users.Update(model);
             await _context.SaveChangesAsync();
-            return Unit.Value;
+            return ServiceResult<UserDto>.SuccessResult(_mapper.Map<UserDto>(model));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace TestApp.API.Pipeline.Login.Handler
 				return ServiceResult<UserDto>.WarningResult(null,"Kullanıcı Bulunamadı","400");
 
 			UserDto model = _mapper.Map<UserDto>(checkData);
-			return ServiceResult<UserDto>.SuccessResult(model, "Ok", "200");
+			return ServiceResult<UserDto>.SuccessResult(model);
 		}
 	}
 }

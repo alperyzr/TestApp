@@ -1,4 +1,5 @@
 using Bentas.O2.WebExtensions.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using TestApp.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddScoped(p => BentasRestService.For<IApiClient>());
 
 builder.Services.AddScoped<HttpClient>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

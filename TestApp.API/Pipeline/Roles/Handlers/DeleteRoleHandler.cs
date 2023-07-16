@@ -23,7 +23,7 @@ namespace TestApp.API.Pipeline.Roles.Handlers
 
             _context.Remove(model);
             await _context.SaveChangesAsync();
-			return ServiceResult<Unit>.SuccessResult(Unit.Value, "Ok", "200");
+			return ServiceResult<Unit>.SuccessResult(Unit.Value);
 
         }
     }

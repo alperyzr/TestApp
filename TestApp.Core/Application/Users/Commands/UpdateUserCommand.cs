@@ -8,7 +8,7 @@ using TestApp.Core.Application.Users.ViewModels;
 
 namespace TestApp.Core.Application.Users.Commands
 {
-    public class UpdateUserCommand: UserDto, IRequest<ServiceResult<Unit>>
+    public class UpdateUserCommand: UserDto, IRequest<ServiceResult<UserDto>>
     {
         public int Id { get; set; }
     }

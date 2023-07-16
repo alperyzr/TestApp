@@ -28,7 +28,7 @@ namespace TestApp.API.Pipeline.Roles.Handlers
                 return ServiceResult<RoleDto>.WarningResult(null, "Böyle bir rol mevcut değil.", "400");
 			
             var response = _mapper.Map<RoleDto>(model);
-            return ServiceResult<RoleDto>.SuccessResult(response, "Ok", "200"); ;
+            return ServiceResult<RoleDto>.SuccessResult(response); ;
         }
     }
 }

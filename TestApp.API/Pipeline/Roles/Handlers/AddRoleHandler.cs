@@ -28,7 +28,7 @@ namespace TestApp.API.Pipeline.Roles.Handlers
             Role model = _mapper.Map<Role>(request);
             await _context.Roles.AddAsync(model);
             await _context.SaveChangesAsync();
-            return ServiceResult<RoleDto>.SuccessResult(_mapper.Map<RoleDto>(model),"Ok","200");
+            return ServiceResult<RoleDto>.SuccessResult(_mapper.Map<RoleDto>(model));
         }
     }
 }

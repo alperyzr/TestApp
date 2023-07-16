@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.UserRoles.Handlers
 {
-    public class GetUserRoleByIdHandler : IRequestHandler<GetUserRoleByIdQuery, GetUserRoleByIdDto>
+    public class GetUserRoleByIdHandler : IRequestHandler<GetUserRoleByIdQuery, ServiceResult<GetUserRoleByIdDto>>
     {
         private readonly AppDbContext _comtext;
         private readonly IMapper _mapper;
@@ -17,8 +18,9 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
             _comtext = comtext;
             _mapper = mapper;
         }
-        public async Task<GetUserRoleByIdDto> Handle(GetUserRoleByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<GetUserRoleByIdDto>> Handle(GetUserRoleByIdQuery request, CancellationToken cancellationToken)
         {
+
 
             var model =  _comtext.UserRoles.Include(x=>x.User).Include(x=>x.Role).Select(x=> new GetUserRoleByIdDto
             {
@@ -34,8 +36,11 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
                 
             }).FirstOrDefault(x => x.Id == request.Id);
 
-            var response = _mapper.Map<GetUserRoleByIdDto>(model);
-            return response;
+            if (model == null)
+				return ServiceResult<GetUserRoleByIdDto>.WarningResult(null,"Kullanıcı Rolü Bulunamadı.");
+
+			var response = _mapper.Map<GetUserRoleByIdDto>(model);
+            return ServiceResult<GetUserRoleByIdDto>.SuccessResult(response);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var CookieUserKey = HttpContextAccessor.HttpContext.Request.Cookies["UserKey"];
+}
 <link href="~/css/sidebar.css" rel="stylesheet" />
 <div class="sidebar">
   <a class="active" href="#home">Dashboard</a>
@@ -6,5 +9,20 @@
   <a href="Role/Index">Roller</a>
   <a href="UserRole/Index">Kullancı Rolleri</a>
   <a href="UrlShort/Index">Kullancı Urlleri</a>
+    <div class="user-area">
+        <div class="row">
+            <div class="col-12">
+                <div class="user-image">
+                    <img src="~/img/default-user.png" />
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="user-name">
+                    @CookieUserKey
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 

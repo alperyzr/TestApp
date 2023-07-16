@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
+using TestApp.Core.Application;
 using TestApp.Core.Application.Users.Commands;
+using TestApp.Core.Application.Users.ViewModels;
 using TestApp.Core.Entities;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.Users.Handlers
 {
-    public class AddUserHandler : IRequestHandler<AddUserCommand, int>
+    public class AddUserHandler : IRequestHandler<AddUserCommand, ServiceResult<UserDto>>
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -17,16 +19,16 @@ namespace TestApp.API.Pipeline.Users.Handlers
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(AddUserCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<UserDto>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var checkData = _context.Users.FirstOrDefault(x => x.Email == request.Email);
             if (checkData != null)
-                return 0;
+                return ServiceResult<UserDto>.WarningResult(null,"Kullanıcı Bulunamadı");
             
             User model = _mapper.Map<User>(request);
             await _context.Users.AddAsync(model);
             await _context.SaveChangesAsync();
-            return model.Id;
+            return ServiceResult<UserDto>.SuccessResult(_mapper.Map<UserDto>(model));
         }
     }
 }

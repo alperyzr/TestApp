@@ -8,7 +8,7 @@ using TestApp.Core.Application.Roles.ViewModels;
 
 namespace TestApp.Core.Application.Roles.Commands
 {
-    public class UpdateRoleCommand : RoleDto, IRequest<ServiceResult<Unit>>
+    public class UpdateRoleCommand : RoleDto, IRequest<ServiceResult<RoleDto>>
     {
         public int Id { get; set; }
     }

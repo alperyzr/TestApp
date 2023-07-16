@@ -26,6 +26,27 @@
             color: white;
         }
 
+    .sidebar .user-area {
+        position: absolute;
+        bottom: 5%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .sidebar .user-image {
+        text-align: center;
+    }
+
+        .sidebar .user-image img {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+        }
+
+    .sidebar .user-name {
+        text-align: center;
+    }
+
 @media screen and (max-width: 700px) {
     .sidebar {
         width: 100%;
@@ -36,8 +57,6 @@
         .sidebar a {
             float: left;
         }
-
-   
 }
 
 @media screen and (max-width: 400px) {
