@@ -8,7 +8,7 @@ using TestApp.Core.Application.UrlShorts.Commands;
 
 namespace TestApp.API.Pipeline.UrlShorts
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UrlShortController : ControllerBase
     {

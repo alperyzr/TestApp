@@ -1,4 +1,6 @@
-﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+﻿@using Kendo.Mvc.UI;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@addTagHelper *, Kendo.Mvc
 @{
     var CookieUserKey = HttpContextAccessor.HttpContext.Request.Cookies["UserKey"];
 }
@@ -17,12 +19,21 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="user-name">
-                    @CookieUserKey
+                <div class="user-name">                 
+                    <div id="megaStore">
+                        <kendo-menu orientation="MenuOrientation.Horizontal" name="Menu">
+                            <items>
+                                <menu-item text="@CookieUserKey">
+                                    <sub-items>
+                                        <menu-item text="Çıkış Yap" asp-action="LogOut" asp-controller="Login"></menu-item>
+                                       
+                                    </sub-items>
+                                </menu-item>
+                            </items>
+                        </kendo-menu>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-

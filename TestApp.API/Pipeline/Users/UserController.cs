@@ -2,13 +2,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;
 
 namespace TestApp.API.Pipeline.Users
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -19,31 +20,31 @@ namespace TestApp.API.Pipeline.Users
             _mediator = mediator;
         }
 
-        [HttpGet("{Id:int:min(1)}")]
+        [HttpGet("{Id:int:min(1)}")]      
         public async Task<IActionResult> GetUserById([FromRoute] GetUserByIdQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
-        [HttpPost("listDs")]
+        [HttpPost]        
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUserView>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListDsUser([FromBody] ListDsUserQuery req)
         {           
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
-        [HttpPost]
+        [HttpPost]        
         public async Task<IActionResult> AddUser([FromBody] AddUserCommand req)
         {            
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
-        [HttpPut("{Id:int:min(1)}")]
+        [HttpPut("{Id:int:min(1)}")]        
         public async Task<IActionResult> UpdateUser([FromRoute] int Id,
                                                     [FromBody] UpdateUserCommand req)
         {            
@@ -52,13 +53,20 @@ namespace TestApp.API.Pipeline.Users
             return Ok();
         }
 
-        [HttpDelete("{Id:int:min(1)}")]
+        [HttpDelete("{Id:int:min(1)}")]      
         public async Task<IActionResult> DeleteUser([FromRoute] int Id,
                                                     [FromQuery] DeleteUserCommand req)
         {
             req.Id = Id;
             await _mediator.Send(req);
             return NoContent();
+        }
+
+        [HttpGet]       
+        public async Task<IActionResult> GetAllUsers([FromBody] GetAllUsersQuery req)
+        {
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
     }
 }

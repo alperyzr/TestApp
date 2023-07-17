@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Core.Application.Users.ViewModels
 {
-	public class UserView
+	public class UserView:UserDto
 	{
 	}
 }

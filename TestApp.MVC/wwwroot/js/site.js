@@ -1,4 +1,39 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function AreYouSureDelete(id, ajaxPath,) {
+    debugger;
+    Swal.fire({
+        title: 'Silmek İstediğinizden Eminmisiniz?',       
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sil',
+        cancelButtonText: 'VAzgeç',
+        reverseButtons: true,
+    }).then((result) => {
 
-// Write your JavaScript code.
+        if (result.isConfirmed) {
+            debugger;
+            $.ajax({
+                type: "DELETE",
+                url: ajaxPath,
+                data: id,
+                success: function (data) {
+                    debugger;
+                    Swal.fire('Saved!', '', 'success')
+                },
+                error: function (data) {
+                    debugger;
+                    Swal.fire('Saved!', '', 'success')
+                }
+            });
+        }
+        else if (result.dismiss === Swal.DismissReason.cancel)
+        {
+            debugger;
+            swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error'
+            )
+        }
+       
+    })
+}

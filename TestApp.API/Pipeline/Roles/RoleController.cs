@@ -8,7 +8,7 @@ using TestApp.Core.Application.Roles.ViewModels;
 
 namespace TestApp.API.Pipeline.Roles
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class RoleController : ControllerBase
     {

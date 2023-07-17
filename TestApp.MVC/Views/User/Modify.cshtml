@@ -1,0 +1,63 @@
+﻿@using TestApp.Core.Application.Users.ViewModels;
+@model UserDto
+
+<bt-viewmodel name="User.Edit" view-data="Model">
+
+    <bt-grid id="UserForm">
+        
+        <bt-container layout="center">
+            <bt-row>
+                <bt-col>
+                    <div id="errorDiv"></div>
+                    <input type="hidden" id="Id" value="@Model.Id" />
+                </bt-col>
+            </bt-row>
+        </bt-container>
+
+        <bt-container  layout="center">
+            <bt-panel header="Parametreler" icon-class="Edit">
+                <bt-grid>
+                    <bt-row>
+                        <bt-col col-span="c6">
+                            <bt-textbox binding="@Model.FirstName" />
+                            
+                        </bt-col>
+                        <bt-col col-span="c6">
+                            <bt-textbox binding="@Model.LastName" />
+                        </bt-col>
+
+                    </bt-row>
+
+                    <bt-row>
+
+                        <bt-col col-span="c6">
+                            <bt-textbox binding="@Model.Email" />
+                        </bt-col>
+
+                        <bt-col col-span="c6">
+                            <bt-textbox binding="@Model.Password" />
+                        </bt-col>
+
+                    </bt-row>
+
+                    <bt-row>
+
+                        <bt-col col-span="c6">
+                            <bt-textbox binding="@Model.BirthDate" />
+                        </bt-col>
+
+                        <bt-col col-span="c6">
+                            <bt-textbox binding="@Model.ImagePath" />
+                        </bt-col>
+                    </bt-row>
+
+
+                </bt-grid>
+            </bt-panel>
+        </bt-container>
+    </bt-grid>
+
+    <bt-footer />
+</bt-viewmodel>
+
+

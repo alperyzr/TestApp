@@ -8,7 +8,7 @@ using TestApp.Core.Application.UserRoles.ViewModels;
 
 namespace TestApp.API.Pipeline.UserRoleRoles
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserRoleController : ControllerBase
     {

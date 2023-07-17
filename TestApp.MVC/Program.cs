@@ -1,22 +1,24 @@
 using Bentas.O2.WebExtensions.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using TestApp.MVC.Services;
+using TestApp.MVC.Services.Interfaces;
 using TestApp.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddKendo();
 
-//var DefaultApi = builder.Configuration.GetValue<string>("ApiUrl:DefaultApi");
-
-//builder.Services.AddScoped(sp =>
-//	new HttpClient { BaseAddress = new Uri(DefaultApi) });
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddScoped(p => BentasRestService.For<IApiClient>());
+
 
 builder.Services.AddScoped<HttpClient>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<ILoginService, LoginService>();  
+builder.Services.AddScoped<IUserService, UserService>();  
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();  
+builder.Services.AddScoped<IRoleService, RoleService>();  
+builder.Services.AddScoped<IUrlShortService, UrlShortService>();  
 
 var app = builder.Build();
 

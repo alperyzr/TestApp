@@ -9,7 +9,7 @@ using MediatR;
 
 namespace TestApp.API.Pipeline.Login
 {
-	[Route("api/[controller]")]
+	[Route("api/[controller]/[action]")]
 	[ApiController]
 	public class LoginController : Controller
 	{
@@ -20,8 +20,7 @@ namespace TestApp.API.Pipeline.Login
 			_mediator = mediator;
 		}
 
-		[HttpPost]
-		[Route("login")]
+		[HttpPost]		
 		public async Task<IActionResult> Login([FromBody] LoginQuery req)
 		{
 			var model = await _mediator.Send(req);

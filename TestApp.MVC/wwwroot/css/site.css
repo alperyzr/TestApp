@@ -1,18 +1,19 @@
-html {
-  font-size: 14px;
+﻿td.actions a {
+    text-decoration: none;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    td.actions a.detail {
+        color: #333;
+    }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
+    td.actions a.delete {
+        color: #f00;
+    }
 
-body {
-  margin-bottom: 60px;
-}
+    td.actions a.edit {
+        color: #488ccc;
+    }
+
+    td.actions a i {
+        font-size: 1.1rem;
+    }

@@ -1,4 +1,8 @@
-﻿
+﻿body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+
 .sidebar {
     margin: 0;
     padding: 0;
@@ -29,23 +33,80 @@
     .sidebar .user-area {
         position: absolute;
         bottom: 5%;
-        width: 100%;
-        overflow: hidden;
     }
 
-    .sidebar .user-image {
-        text-align: center;
-    }
-
-        .sidebar .user-image img {
-            width: 40px;
-            height: 40px;
+        .sidebar .user-area .user-image {
             border-radius: 100%;
+            margin: auto;
+            width: 50px;
+            height: 50px;
         }
 
-    .sidebar .user-name {
-        text-align: center;
+            .sidebar .user-area .user-image img {
+                width: 40px;
+                height: 40px;
+            }
+
+        .sidebar .user-area .user-name {
+            text-align: center;
+        }
+
+        .sidebar .user-area .profile-link {
+            border: none;
+            background-color: transparent;
+        }
+
+
+#menu h2 {
+    font-size: 1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+}
+
+#template img {
+    margin: 5px 20px 0 0;
+    float: left;
+}
+
+#template {
+    width: 380px;
+}
+
+    #template ol {
+        float: left;
+        margin: 0 0 0 30px;
+        padding: 10px 10px 0 10px;
     }
+
+    #template:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    #template .k-button {
+        float: left;
+        clear: left;
+        margin: 5px 0 5px 12px;
+    }
+
+.k-menu:not(.k-context-menu) {
+    background-color: transparent !important;
+}
+
+    .k-menu:not(.k-context-menu) > .k-item {
+        width: 100%;
+        align-items:center;
+    }
+
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
 
 @media screen and (max-width: 700px) {
     .sidebar {
@@ -57,6 +118,10 @@
         .sidebar a {
             float: left;
         }
+
+    div.content {
+        margin-left: 0;
+    }
 }
 
 @media screen and (max-width: 400px) {
