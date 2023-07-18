@@ -10,7 +10,7 @@
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
-    overflow: auto;
+    overflow: hidden !important;
 }
 
     .sidebar a {
@@ -28,6 +28,9 @@
         .sidebar a:hover:not(.active) {
             background-color: #555;
             color: white;
+        }
+        .siderbar a i{
+            color:#fff;
         }
 
     .sidebar .user-area {

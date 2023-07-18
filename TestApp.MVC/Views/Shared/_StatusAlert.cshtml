@@ -1,0 +1,33 @@
+﻿
+<script asp-append-version="true" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link asp-append-version="true" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.min.css">
+@if (TempData["errors"] != null)
+{
+    string message = TempData["errors"].ToString();
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Beklenmedik Bir Hata Oluştu',
+            text: '@message',
+            showCloseButton: true,
+        })
+    </script>
+
+    TempData["errors"] = null;
+}
+
+@if (TempData["success"] != null)
+{
+    string message = TempData["success"].ToString();
+    <script>
+
+        Swal.fire({
+            icon: 'success',
+            title: 'İşlem Başarılı',
+            text: '@message',
+            showCloseButton: true,
+        })
+    </script>
+    TempData["success"] = null;
+
+}

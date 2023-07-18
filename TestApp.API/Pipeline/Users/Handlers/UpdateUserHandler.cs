@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Commands;
@@ -22,17 +23,17 @@ namespace TestApp.API.Pipeline.Users.Handlers
 
         public async Task<ServiceResult<UserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            User model = _mapper.Map<User>(request);
-            model.Id = request.Id;
 
-			var chechData = await _context.Users.FindAsync(request.Id);
-			
-			if (chechData == null)
-				return ServiceResult<UserDto>.WarningResult(null, "Kullanıcı Bulunamadı");
+            var chechData = await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.Id);
 
-			_context.Users.Update(model);
+            if (chechData == null)
+                return ServiceResult<UserDto>.WarningResult(null, "Kullanıcı Bulunamadı");
+
+            request.UpdatedDate = DateTime.Now;
+            _context.Users.Update(_mapper.Map<User>(request));
             await _context.SaveChangesAsync();
-            return ServiceResult<UserDto>.SuccessResult(_mapper.Map<UserDto>(model));
+            return ServiceResult<UserDto>.SuccessResult(_mapper.Map<UserDto>(request));
+
         }
     }
 }

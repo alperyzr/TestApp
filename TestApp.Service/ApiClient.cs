@@ -35,6 +35,7 @@ namespace TestApp.Service
         public static string DeleteRole = "role/DeleteRole";
         public static string GetRoleById = "role/GetRoleById";
         public static string ListDsRole = "role/listDs";
+        public static string GetAllRoles = "role/GetAllRolers";
         #endregion
 
         #region UserRole
@@ -43,6 +44,7 @@ namespace TestApp.Service
         public static string DeleteUserRole = "userrole/DeleteUserRole";
         public static string GetUserRoleById = "userrole/GetUserRoleById";
         public static string ListDsUserRole = "userrole/listDs";
+        public static string GetAllUserRoles = "userrole/GetAllUserRoles";
         #endregion
 
         #region UrlShort
@@ -51,6 +53,7 @@ namespace TestApp.Service
         public static string DeleteUrlShort = "urlshort/DeleteUrlShort";
         public static string GetUrlShortById = "urlshort/GetUrlShortById";
         public static string ListDsUrlShortr = "urlshort/listDs";
+        public static string GetAllUrlShorts = "urlshort/GetAllUrlShorts";
         #endregion
 
     }

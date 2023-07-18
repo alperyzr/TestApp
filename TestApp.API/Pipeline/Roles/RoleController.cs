@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.Roles.ViewModels;
+using TestApp.Core.Application.UserRoles.Queries;
 
 namespace TestApp.API.Pipeline.Roles
 {
@@ -59,6 +60,13 @@ namespace TestApp.API.Pipeline.Roles
             req.Id = Id;
             await _mediator.Send(req);
             return NoContent();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllRoles([FromBody] GetAllRolesQuery req)
+        {
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
     }
 }

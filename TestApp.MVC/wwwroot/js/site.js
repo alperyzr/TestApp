@@ -1,39 +1,38 @@
-﻿function AreYouSureDelete(id, ajaxPath,) {
+﻿$(function () {
     debugger;
+    var url = window.location;
+
+    $('.sidebar a').filter(function () {
+        return this.href == url;
+    }).addClass('active');
+
+});
+
+function AreYouSureDelete(id, ajaxPath) {
     Swal.fire({
         title: 'Silmek İstediğinizden Eminmisiniz?',       
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Sil',
-        cancelButtonText: 'VAzgeç',
+        cancelButtonText: 'Vazgeç',
         reverseButtons: true,
     }).then((result) => {
 
-        if (result.isConfirmed) {
-            debugger;
+        if (result.isConfirmed) {           
+            var url = ajaxPath + "/" + id;
             $.ajax({
-                type: "DELETE",
-                url: ajaxPath,
+                type: "GET",
+                url: url,
                 data: id,
                 success: function (data) {
                     debugger;
-                    Swal.fire('Saved!', '', 'success')
+                    window.location.reload();
                 },
                 error: function (data) {
                     debugger;
-                    Swal.fire('Saved!', '', 'success')
+                    Swal.fire('Beklenmedik Bir Hata Oluştu', '', 'error')
                 }
             });
-        }
-        else if (result.dismiss === Swal.DismissReason.cancel)
-        {
-            debugger;
-            swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your imaginary file is safe :)',
-                'error'
-            )
-        }
-       
+        }        
     })
 }

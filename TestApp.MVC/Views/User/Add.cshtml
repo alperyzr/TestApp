@@ -1,0 +1,81 @@
+﻿@using TestApp.Core.Application.Users.ViewModels;
+@model UserDto
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Add" asp-controller="User" method="post">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Ad</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="FirstName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Soyad</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="LastName" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Email</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="Email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Şifre</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="Password" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Doğum Tarihi</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="BirthDate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Resim Path</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="ImagePath" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-align-right p-2">
+                <button type="submit" class="add-button">Kaydet</button>
+            </div>
+        </form>
+        
+    </div>
+</div>

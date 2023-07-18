@@ -1,5 +1,7 @@
 using Bentas.O2.WebExtensions.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using TestApp.MVC.Services;
 using TestApp.MVC.Services.Interfaces;
 using TestApp.Service;
@@ -18,8 +20,10 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUserService, UserService>();  
 builder.Services.AddScoped<IUserRoleService, UserRoleService>();  
 builder.Services.AddScoped<IRoleService, RoleService>();  
-builder.Services.AddScoped<IUrlShortService, UrlShortService>();  
+builder.Services.AddScoped<IUrlShortService, UrlShortService>();
 
+
+builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Latin1Supplement, UnicodeRanges.LatinExtendedA }));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

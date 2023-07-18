@@ -21,7 +21,7 @@ namespace TestApp.API.Pipeline.Users.Handlers
 
         public async Task<ServiceResult<List<UserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var response = await _context.Users.ToListAsync();
+            var response = await _context.Users.OrderByDescending(x=>x.Id).ToListAsync();
             return ServiceResult<List<UserDto>>.SuccessResult(_mapper.Map<List<UserDto>>(response));
         }
     }

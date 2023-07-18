@@ -10,6 +10,6 @@ namespace TestApp.Core.Application.Users.Commands
 {
     public class UpdateUserCommand: UserDto, IRequest<ServiceResult<UserDto>>
     {
-        public int Id { get; set; }
+        
     }
 }

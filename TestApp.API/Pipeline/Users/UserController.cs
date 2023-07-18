@@ -20,49 +20,49 @@ namespace TestApp.API.Pipeline.Users
             _mediator = mediator;
         }
 
-        [HttpGet("{Id:int:min(1)}")]      
+        [HttpGet("{Id:int:min(1)}")]
         public async Task<IActionResult> GetUserById([FromRoute] GetUserByIdQuery req)
         {
             var model = await _mediator.Send(req);
             return Ok(model);
         }
 
-        [HttpPost]        
+        [HttpPost]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUserView>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListDsUser([FromBody] ListDsUserQuery req)
-        {           
+        {
             var model = await _mediator.Send(req);
             return Ok(model);
         }
 
 
-        [HttpPost]        
+        [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] AddUserCommand req)
-        {            
+        {
             var model = await _mediator.Send(req);
             return Ok(model);
         }
 
 
-        [HttpPut("{Id:int:min(1)}")]        
+        [HttpPut("{Id:int:min(1)}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int Id,
                                                     [FromBody] UpdateUserCommand req)
-        {            
+        {
             req.Id = Id;
-            await _mediator.Send(req);
-            return Ok();
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
-        [HttpDelete("{Id:int:min(1)}")]      
+        [HttpDelete("{Id:int:min(1)}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int Id,
                                                     [FromQuery] DeleteUserCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return NoContent();
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
-        [HttpGet]       
+        [HttpGet]
         public async Task<IActionResult> GetAllUsers([FromBody] GetAllUsersQuery req)
         {
             var model = await _mediator.Send(req);

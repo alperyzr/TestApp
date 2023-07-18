@@ -39,16 +39,25 @@ namespace TestApp.MVC.Controllers
         [CommandPermission(Command = typeof(AddUserCommand))]
         public async Task<IActionResult> Add()
         {
-            return View("Modify", new UserView());
+            return View(new UserView());
         }
 
         [HttpPost]
         [CommandPermission(Command = typeof(AddUserCommand))]
-        public async Task<IActionResult> Add([FromBody] AddUserCommand req)
+        public async Task<IActionResult> Add([FromForm] AddUserCommand req)
         {
 
             var model = await _userService.AddUser(req);
-            return Json(new JsonResponse { IsSuccess = model.Code == "200" ? true : false, Data = model.Payload });
+            if(model.Code == "200")
+            {
+                TempData["success"] = model.Message;
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+                TempData["errors"] = model.Message;
+                return RedirectToAction("Index", "User");
+            }
 
         }
 
@@ -57,19 +66,29 @@ namespace TestApp.MVC.Controllers
         public async Task<IActionResult> Update(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "User");
 
 
             var model = await _userService.GetUserById(new GetUserByIdQuery { Id = (int)id });
-            return View("Modify", model.Payload);
+            return View(model.Payload);
         }
 
         [HttpPost]
         [CommandPermission(Command = typeof(UpdateUserCommand))]
-        public async Task<IActionResult> Update([FromBody] UpdateUserCommand req)
+        public async Task<IActionResult> Update([FromRoute] int Id, 
+                                                [FromForm] UpdateUserCommand req)
         {
-            var model = await _userService.UpdateUser(req.Id, req);
-            return Json(new JsonResponse { IsSuccess = model.Code == "200" ? true : false, Data = model.Payload });
+            var model = await _userService.UpdateUser(Id, req);
+            if (model.Code == "200")
+            {
+                TempData["success"] = model.Message;
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+                TempData["errors"] = model.Message;
+                return RedirectToAction("Index", "User");
+            }
 
         }
 
@@ -79,17 +98,36 @@ namespace TestApp.MVC.Controllers
         {
             req.Id = Id;
             var model = await _userService.DeleteUser(Id, req);
-            return Json(new JsonResponse { IsSuccess = model.Code == "200" ? true : false, Data = model.Payload });
+            if (model.Code == "200")
+            {
+                TempData["success"] = model.Message;
+                //return RedirectToAction("Index", "User");
+                return Json(model);
+            }
+            else
+            {
+                TempData["errors"] = model.Message;
+                return Json(model);
+            }
         }
 
         [CommandPermission(Command = typeof(GetUserByIdQuery))]
         public async Task<IActionResult> Detail(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "User");
 
             var model = await _userService.GetUserById(new GetUserByIdQuery { Id = (int)id});
-            return View(model);
+            if (model.Code == "200")
+            {              
+                return View(model.Payload);
+            }
+            else
+            {
+                TempData["errors"] = model.Message;
+                return RedirectToAction("Index", "User");
+            }
+            
         }
 
     }

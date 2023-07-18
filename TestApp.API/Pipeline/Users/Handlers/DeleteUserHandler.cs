@@ -23,7 +23,7 @@ namespace TestApp.API.Pipeline.Users.Handlers
 
             _context.Remove(model);
             await _context.SaveChangesAsync();
-            return ServiceResult<Unit>.SuccessResult(Unit.Value); ;
+            return ServiceResult<Unit>.SuccessResult(Unit.Value,"Silme İşlemi Başarıyla Gerçekleşti"); ;
 
         }
     }
