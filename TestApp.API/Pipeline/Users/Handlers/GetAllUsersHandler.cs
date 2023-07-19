@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TestApp.Core.Application;
-using TestApp.Core.Application.UserRoles.Queries;
+using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;
 using TestApp.Repository;
 

@@ -1,7 +1,6 @@
 ﻿using Bentas.O2.DynamicLinq;
 using MediatR;
 using TestApp.Core.Application;
-using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;

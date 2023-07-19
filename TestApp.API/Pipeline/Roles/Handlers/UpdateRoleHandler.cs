@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using TestApp.Core.Application;
 using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.ViewModels;
-using TestApp.Core.Application.UrlShorts.ViewModels;
-using TestApp.Core.Application.Users.ViewModels;
 using TestApp.Core.Entities;
 using TestApp.Repository;
 

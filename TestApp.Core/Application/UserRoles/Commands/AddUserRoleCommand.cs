@@ -10,5 +10,6 @@ namespace TestApp.Core.Application.UserRoles.Commands
 {
     public class AddUserRoleCommand : UserRoleDto, IRequest<ServiceResult<UserRoleDto>>
     {
+        
     }
 }

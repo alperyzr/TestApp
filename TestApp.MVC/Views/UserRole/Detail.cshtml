@@ -1,0 +1,81 @@
+﻿@using TestApp.Core.Application.UserRoles.ViewModels;
+@model UserRoleDto
+
+<div class="card">
+    <div class="card-header">
+        Kullanıcı Rolü Detayı
+    </div>
+    <div class="card-body">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Ad</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.UserName</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Rol Adı</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.RoleName</span>
+                        </div>
+                    </div>
+                </div>               
+            </div>           
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detail-title">Aktif mi</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="detail-text">@Model.IsActive</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detail-title"> Silindi mi</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="detail-text">@Model.IsDeleted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Eklendiği Tarih</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.CreatedDate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Güncellendiği Tarih</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.UpdatedDate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

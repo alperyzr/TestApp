@@ -10,8 +10,11 @@ namespace TestApp.Core.Application.UserRoles.ViewModels
     public class UserRoleDto: _BaseDto
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int RoleId { get; set; }
-       
+        public int? UserId { get; set; }
+        public int? RoleId { get; set; }
+        public string UserName { get; set; }
+        public string RoleName { get; set; }       
+        public string[] SelectedRoles { get; set; }
+
     }
 }

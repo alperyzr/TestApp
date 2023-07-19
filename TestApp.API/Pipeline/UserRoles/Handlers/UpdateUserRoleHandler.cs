@@ -3,6 +3,7 @@ using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
+using TestApp.Core.Application.Users.ViewModels;
 using TestApp.Core.Entities;
 using TestApp.Repository;
 
@@ -26,14 +27,12 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
            
             if (chechUser == null || chechRole == null)          
                 return ServiceResult<UserRoleDto>.WarningResult(null,"Kullanıcı ve ya Rol Bulunamadı");
-            
 
-            UserRole model = _mapper.Map<UserRole>(request);
-            model.Id = request.Id;
 
-            _context.UserRoles.Update(model);
+            request.UpdatedDate = DateTime.Now;
+            _context.UserRoles.Update(_mapper.Map<UserRole>(request));
             await _context.SaveChangesAsync();
-            return ServiceResult<UserRoleDto>.SuccessResult(_mapper.Map<UserRoleDto>(model)); ;
+            return ServiceResult<UserRoleDto>.SuccessResult(_mapper.Map<UserRoleDto>(request));
         }
     }
 }

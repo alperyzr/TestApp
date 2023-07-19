@@ -343,3 +343,10 @@ td.actions a {
 .detail-title {
     color: #776BCC;
 }
+.card {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.card .card-header{
+    padding-top:13px !important;
+    padding-bottom:13px !important;
+}

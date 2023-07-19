@@ -10,6 +10,6 @@ namespace TestApp.Core.Application.Roles.Commands
 {
     public class UpdateRoleCommand : RoleDto, IRequest<ServiceResult<RoleDto>>
     {
-        public int Id { get; set; }
+       
     }
 }

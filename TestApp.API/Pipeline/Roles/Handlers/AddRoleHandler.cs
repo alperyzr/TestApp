@@ -26,6 +26,7 @@ namespace TestApp.API.Pipeline.Roles.Handlers
                 return ServiceResult<RoleDto>.WarningResult(null,"Böyle bir rol mevcut.","400");
 
             Role model = _mapper.Map<Role>(request);
+            model.CreatedDate = DateTime.Now;
             await _context.Roles.AddAsync(model);
             await _context.SaveChangesAsync();
             return ServiceResult<RoleDto>.SuccessResult(_mapper.Map<RoleDto>(model));

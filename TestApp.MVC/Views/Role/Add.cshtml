@@ -1,0 +1,30 @@
+﻿@using TestApp.Core.Application.Roles.ViewModels;
+@model RoleDto
+
+<div class="card">
+    <div class="card-header">
+        Rol Ekle
+    </div>
+    <div class="card-body">
+        <form asp-action="Add" asp-controller="Role" method="post">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Ad</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-align-right p-2">
+                        <button type="submit" class="add-button">Kaydet</button>
+                    </div>
+                </div>               
+            </div>           
+        </form>
+
+    </div>
+</div>

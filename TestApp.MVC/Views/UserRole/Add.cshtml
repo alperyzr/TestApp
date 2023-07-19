@@ -1,0 +1,55 @@
+﻿@using TestApp.Core.Application.UserRoles.ViewModels;
+@model UserRoleDto
+@section Styles {
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Update" asp-controller="UserRole" method="post">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Kullanıcılar</span>
+                            </div>
+                            <div class="col-12">
+
+                                <select asp-for="UserId" class="selectpicker" data-live-search="true">
+                                    @foreach (var item in ViewBag.Users)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Roller</span>
+                            </div>
+                            <div class="col-12">
+                                <select asp-for="SelectedRoles" class="selectpicker" multiple data-live-search="true">
+                                    @foreach (var item in ViewBag.Roles)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 text-align-right p-2">
+                        <button type="submit" class="add-button">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -23,24 +23,24 @@ namespace TestApp.API.Pipeline.Roles
         [HttpGet("{Id:int:min(1)}")]
         public async Task<IActionResult> GetRoleById([FromRoute] GetRoleByIdQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
         [HttpPost("listDs")]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsRoleView>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListDsRole([FromBody] ListDsRoleQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> AddRole([FromBody] AddRoleCommand req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
@@ -49,8 +49,8 @@ namespace TestApp.API.Pipeline.Roles
                                                     [FromBody] UpdateRoleCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return Ok();
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
         [HttpDelete("{Id:int:min(1)}")]
@@ -58,8 +58,8 @@ namespace TestApp.API.Pipeline.Roles
                                                     [FromQuery] DeleteRoleCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return NoContent();
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
         [HttpGet]

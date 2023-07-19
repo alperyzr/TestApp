@@ -35,7 +35,7 @@ namespace TestApp.Service
         public static string DeleteRole = "role/DeleteRole";
         public static string GetRoleById = "role/GetRoleById";
         public static string ListDsRole = "role/listDs";
-        public static string GetAllRoles = "role/GetAllRolers";
+        public static string GetAllRoles = "role/GetAllRoles";
         #endregion
 
         #region UserRole

@@ -6,10 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TestApp.Core.Application.UserRoles.ViewModels;
 
-namespace TestApp.Core.Application.UserRoles.Commands
+namespace TestApp.Core.Application.UserRoles.Queries
 {
-    public class UpdateUserRoleCommand : UserRoleDto, IRequest<ServiceResult<UserRoleDto>>
+    public class GetAllUserRolesQuery: IRequest<ServiceResult<List<UserRoleDto>>>
     {
-        
     }
 }

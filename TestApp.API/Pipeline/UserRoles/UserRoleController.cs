@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.UserRoles.ViewModels;
+using TestApp.Core.Application.Users.Queries;
 
 namespace TestApp.API.Pipeline.UserRoleRoles
 {
@@ -20,7 +21,7 @@ namespace TestApp.API.Pipeline.UserRoleRoles
         }
 
         [HttpGet("{Id:int:min(1)}")]
-        public async Task<IActionResult> GetUserRoleRoleById([FromRoute] GetUserRoleByIdQuery req)
+        public async Task<IActionResult> GetUserRoleById([FromRoute] GetUserRoleByIdQuery req)
         {
             var entityId = await _mediator.Send(req);
             return Ok(entityId);
@@ -45,7 +46,7 @@ namespace TestApp.API.Pipeline.UserRoleRoles
 
         [HttpPut("{Id:int:min(1)}")]
         public async Task<IActionResult> UpdateUserRole([FromRoute] int Id,
-                                                    [FromBody] UpdateUserRoleCommand req)
+                                                        [FromBody] UpdateUserRoleCommand req)
         {
             req.Id = Id;
             await _mediator.Send(req);
@@ -54,11 +55,18 @@ namespace TestApp.API.Pipeline.UserRoleRoles
 
         [HttpDelete("{Id:int:min(1)}")]
         public async Task<IActionResult> DeleteUserRole([FromRoute] int Id,
-                                                    [FromQuery] DeleteUserRoleCommand req)
+                                                        [FromQuery] DeleteUserRoleCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return NoContent();
+            var model = await _mediator.Send(req);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUserRoles([FromBody] GetAllUserRolesQuery req)
+        {
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
     }
 }

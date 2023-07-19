@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;

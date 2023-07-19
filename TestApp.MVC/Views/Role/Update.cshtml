@@ -1,0 +1,31 @@
+﻿@using TestApp.Core.Application.Roles.ViewModels;
+@model RoleDto
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Update" asp-controller="Role" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedDate" />
+            <input type="hidden" asp-for="IsActive" />
+            <input type="hidden" asp-for="IsDeleted" />
+            <input type="hidden" asp-for="CreatedDate" />
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Ad</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-align-right p-2">
+                        <button type="submit" class="add-button">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

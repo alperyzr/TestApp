@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
@@ -23,13 +24,34 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
 
         public async Task<ServiceResult<UserRoleDto>> Handle(AddUserRoleCommand request, CancellationToken cancellationToken)
         {
-            var checkDataUser = _context.Users.Find(request.UserId);
-            var checkDataRole = _context.Roles.Find(request.RoleId);
+            var checkDataUser = await _context.Users.FindAsync(request.UserId);
+            var checkDataRole = await _context.Roles.FindAsync(request.RoleId);
             if (checkDataUser == null && checkDataRole == null)
-                ServiceResult<UserDto>.WarningResult(null, "Kullanıcı ve ya Rol bulunamadı.", "400");
+                ServiceResult<UserRoleDto>.WarningResult(null, "Kullanıcı ve ya Rol bulunamadı.", "400");
 
             UserRole model = _mapper.Map<UserRole>(request);
-            await _context.UserRoles.AddAsync(model);
+            var userRoles = await _context.UserRoles.Where(x => x.UserId == model.UserId).ToListAsync();
+            foreach (var item in userRoles)
+            {
+                _context.Remove(item);
+            }
+            
+            await _context.SaveChangesAsync();
+
+            foreach (var item in request.SelectedRoles)
+            {               
+                await _context.UserRoles.AddAsync(new UserRole
+                {
+                    CreatedDate = DateTime.Now,
+                    IsActive = model.IsActive,
+                    IsDeleted = model.IsDeleted,
+                    UpdatedDate = model.UpdatedDate,
+                    UserId = model.UserId,
+                    RoleId = Convert.ToInt32(item)
+                    
+                });
+            }
+            
             await _context.SaveChangesAsync();
             return ServiceResult<UserRoleDto>.SuccessResult(_mapper.Map<UserRoleDto>(model));
         }
