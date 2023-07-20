@@ -8,7 +8,7 @@ using TestApp.Core.Entities;
 using TestApp.Repository;
 
 namespace TestApp.API.Pipeline.UrlShorts.Handlers
-{  
+{
     public class AddUrlShortHandler : IRequestHandler<AddUrlShortCommand, ServiceResult<UrlShortDto>>
     {
         private readonly AppDbContext _context;
@@ -23,11 +23,13 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
         public async Task<ServiceResult<UrlShortDto>> Handle(AddUrlShortCommand request, CancellationToken cancellationToken)
         {
             var checkDataUser = _context.Users.Find(request.UserId);
-            
+
             if (checkDataUser == null)
-                return ServiceResult<UrlShortDto>.WarningResult(null,"Kullanıcı Buluunamadı");
+                return ServiceResult<UrlShortDto>.WarningResult(null, "Kullanıcı Buluunamadı");
 
             UrlShort model = _mapper.Map<UrlShort>(request);
+            model.CreatedDate = DateTime.Now;
+            model.ToRedirectUrl = model.Url;
             await _context.UrlShorts.AddAsync(model);
             await _context.SaveChangesAsync();
             return ServiceResult<UrlShortDto>.SuccessResult(_mapper.Map<UrlShortDto>(model));

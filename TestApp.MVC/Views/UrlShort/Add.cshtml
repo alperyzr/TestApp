@@ -1,0 +1,59 @@
+﻿@using TestApp.Core.Application.UrlShorts.ViewModels;
+@model UrlShortDto
+@section Styles {
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+}
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Add" asp-controller="UrlShort" method="post">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Kullanıcı</span>
+                            </div>
+                            <div class="col-12">
+                                <select asp-for="UserId" class="selectpicker" data-live-search="true">
+                                    @foreach (var item in ViewBag.Users)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Url</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="Url" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>Açıklama</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" asp-for="Description" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="col-12 text-align-right p-2">
+                <button type="submit" class="add-button">Kaydet</button>
+            </div>
+        </form>
+
+    </div>
+</div>

@@ -6,10 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TestApp.Core.Application.UrlShorts.ViewModels;
 
-namespace TestApp.Core.Application.UrlShorts.Commands
+namespace TestApp.Core.Application.UrlShorts.Queries
 {
-    public class UpdateUrlShortCommand : UrlShortDto, IRequest<ServiceResult<UrlShortDto>>
+    public class GetAllUrlShortsQuery : IRequest<ServiceResult<List<UrlShortDto>>>
     {
-       
     }
 }

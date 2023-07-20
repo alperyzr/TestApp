@@ -6,6 +6,8 @@ using TestApp.Core.Application.UrlShorts.Queries;
 using TestApp.Core.Application.UrlShorts.ViewModels;
 using TestApp.Core.Application.UrlShorts.Commands;
 
+
+
 namespace TestApp.API.Pipeline.UrlShorts
 {
     [Route("api/[controller]/[action]")]
@@ -22,24 +24,24 @@ namespace TestApp.API.Pipeline.UrlShorts
         [HttpGet("{Id:int:min(1)}")]
         public async Task<IActionResult> GetUrlShortById([FromRoute] GetUrlShortByIdQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
-        [HttpPost("listDs")]
+        [HttpPost]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUrlShortView>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListDsUrlShort([FromBody] ListDsUrlShortQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> AddUrlShort([FromBody] AddUrlShortCommand req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
@@ -48,8 +50,8 @@ namespace TestApp.API.Pipeline.UrlShorts
                                                     [FromBody] UpdateUrlShortCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return Ok();
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
         [HttpDelete("{Id:int:min(1)}")]
@@ -57,8 +59,15 @@ namespace TestApp.API.Pipeline.UrlShorts
                                                     [FromQuery] DeleteUrlShortCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return NoContent();
+            var model = await _mediator.Send(req);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUrlShorts([FromBody] GetAllUrlShortsQuery req)
+        {
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
     }
 }

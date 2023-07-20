@@ -42,8 +42,8 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
             {               
                 await _context.UserRoles.AddAsync(new UserRole
                 {
-                    CreatedDate = DateTime.Now,
                     IsActive = model.IsActive,
+                    CreatedDate = DateTime.Now,
                     IsDeleted = model.IsDeleted,
                     UpdatedDate = model.UpdatedDate,
                     UserId = model.UserId,

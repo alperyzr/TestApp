@@ -1,0 +1,113 @@
+﻿@using TestApp.Core.Application.UrlShorts.ViewModels;
+@model UrlShortDto
+
+<div class="card">
+    <div class="card-header">
+        Kullanıcı Rolü Detayı
+    </div>
+    <div class="card-body">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Kullanıcı</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.UserName</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">URL</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.Url</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Short URL</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.UrlKey</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Yönnlendirilecek Url</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.ToRedirectUrl</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Yönlendirilme Tarihi</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.RedirectUrlDate</span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detail-title">Aktif mi</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="detail-text">@Model.IsActive</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detail-title"> Silindi mi</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="detail-text">@Model.IsDeleted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Eklendiği Tarih</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.CreatedDate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detail-title">Güncellendiği Tarih</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="detail-text">@Model.UpdatedDate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

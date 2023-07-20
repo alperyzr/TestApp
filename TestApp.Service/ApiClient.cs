@@ -52,7 +52,7 @@ namespace TestApp.Service
         public static string UpdateUrlShort = "urlshort/UpdateUrlShort";
         public static string DeleteUrlShort = "urlshort/DeleteUrlShort";
         public static string GetUrlShortById = "urlshort/GetUrlShortById";
-        public static string ListDsUrlShortr = "urlshort/listDs";
+        public static string ListDsUrlShort = "urlshort/listDs";
         public static string GetAllUrlShorts = "urlshort/GetAllUrlShorts";
         #endregion
 

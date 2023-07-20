@@ -15,5 +15,6 @@ namespace TestApp.Core.Application.UrlShorts.ViewModels
         public string Description { get; set; }
         public string ToRedirectUrl { get; set; }
         public DateTime RedirectUrlDate { get; set; }
+        public string UserName { get; set; }
     }
 }
