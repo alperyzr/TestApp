@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TestApp.Core.Application.Roles.ViewModels;
 using TestApp.Core.Application.Users.ViewModels;
+using TestApp.Core.Application.Login.ViewModels;
 
 namespace TestApp.Core.Application.Login.Queries
 {
-	public class LoginQuery : IRequest<ServiceResult<UserDto>>
+	public class LoginQuery : IRequest<ServiceResult<AccessToken>>
 	{
 		[Required(ErrorMessage = "Email alanı boş geçilemez")]		
 		[DisplayName("Email")]

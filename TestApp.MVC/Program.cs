@@ -9,7 +9,7 @@ using TestApp.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddKendo();
-
+builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -39,9 +39,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
 app.UseAuthorization();
 
-
+app.MapControllerRoute(
+    name:"ShortUrl",
+    pattern:"{ShortUrl}",
+    new { controller = "Home", action = "Short" });
 app.MapControllerRoute(
 name: "default",
 pattern: "{controller=Login}/{action=Index}/{id?}");

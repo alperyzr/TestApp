@@ -17,6 +17,8 @@ namespace TestApp.Core.Entities
         public string ImagePath { get; set; }
         public ICollection<Role> Roles { get; set; }
         public ICollection<UrlShort> UrlShorts { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime? RefreshTokenEndDate { get; set; }
 
 
     }

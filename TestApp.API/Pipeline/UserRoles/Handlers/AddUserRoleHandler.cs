@@ -31,8 +31,6 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
 
             UserRole model = _mapper.Map<UserRole>(request);
             
-            
-            
 
             foreach (var item in request.SelectedRoles)
             {               

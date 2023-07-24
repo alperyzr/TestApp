@@ -30,7 +30,7 @@ namespace TestApp.MVC.Controllers
             return View();
         }
 
-        [HttpGet("{ShortUrl}")]
+        
         public async Task<IActionResult> Short([FromRoute] string ShortUrl)
         {
 
@@ -41,7 +41,7 @@ namespace TestApp.MVC.Controllers
                 return Redirect(uri.AbsoluteUri);
             }
             TempData["errors"] = model.Message;
-            return View();
+            return RedirectToAction("Index","Home");
 
         }
 

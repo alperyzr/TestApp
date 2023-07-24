@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
-using TestApp.MVC.Security;
 using TestApp.Core.Application.Login.Queries;
 using TestApp.Core.Application.Users.Commands;
 using MediatR;

@@ -1,5 +1,7 @@
-﻿using TestApp.Core.Application;
+﻿
+using TestApp.Core.Application;
 using TestApp.Core.Application.Login.Queries;
+using TestApp.Core.Application.Login.ViewModels;
 using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Extentions;
 using TestApp.MVC.Services.Interfaces;
@@ -23,9 +25,9 @@ namespace TestApp.MVC.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<ServiceResult<UserDto?>> Login(LoginQuery req)
+        public async Task<ServiceResult<AccessToken?>> Login(LoginQuery req)
         {
-            var model = await _httpClient.CustomPostAsync<ServiceResult<UserDto>>($"{ApiUrl}/{ApiClient.Login}", req);
+            var model = await _httpClient.CustomPostAsync<ServiceResult<AccessToken>>($"{ApiUrl}/{ApiClient.Login}", req);
             return model;
         }
     }

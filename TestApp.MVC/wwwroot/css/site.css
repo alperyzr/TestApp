@@ -350,3 +350,7 @@ td.actions a {
     padding-top:13px !important;
     padding-bottom:13px !important;
 }
+.error-validation-message {
+    display: block;
+    color: #f35353;
+}

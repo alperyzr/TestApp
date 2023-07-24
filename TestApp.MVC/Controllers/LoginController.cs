@@ -8,12 +8,13 @@ using TestApp.MVC.Extentions;
 using TestApp.MVC.Models;
 using TestApp.MVC.Services.Interfaces;
 using TestApp.Service;
+using static MassTransit.ValidationResultExtensions;
 
 namespace TestApp.MVC.Controllers
 {
-	public class LoginController : Controller
-	{
-		private readonly ILoginService _loginService;
+    public class LoginController : Controller
+    {
+        private readonly ILoginService _loginService;
 
         public LoginController(ILoginService loginService)
         {
@@ -21,54 +22,80 @@ namespace TestApp.MVC.Controllers
         }
 
         public IActionResult Index()
-		{
-			var userKey = GetCookie("UserKey");
-			if (String.IsNullOrEmpty(userKey))			
-				return View();
-			else
-				return RedirectToAction("Index","Home");
-		}
+        {
+            var userKey = GetCookie("UserKey");
+            if (String.IsNullOrEmpty(userKey))
+                return View();
+            else
+                return RedirectToAction("Index", "Home");
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> Index(LoginQuery req)
-		{			
-			var model = await _loginService.Login(req);
-            if (model.Code != "200")
-                return View(model);
+        [HttpPost]
+        public async Task<IActionResult> Index(LoginQuery req)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(req.Email))
+                    req.Email = req.Email.ToLower();
 
-            SetCookie("UserKey", model.Payload.FirstName + " " + model.Payload.LastName, 10);
+                var model = await _loginService.Login(req);
+                if (model.Payload != null)
+                {
+                    if (model.Payload.Token != null)
+                    {
+                        SetCookie("Token", model.Payload.Token, 10);
+                        HttpContext.Session.SetString("Token", model.Payload.Token);
+                        SetCookie("UserKey", model.Payload.UserName, 10);
+                        return RedirectToAction("Index", "Home");
 
-            return RedirectToAction("Index", "Home");
-
+                    }
+                    else
+                    {
+                        TempData["errors"] = "Kullanıcı Bilgileri Yanlış !";
+                        return View(req);
+                    }
+                }
+                else
+                {
+                    TempData["errors"] = model.Message;
+                    return View(req);
+                }
+               
+            }
+            else
+            {               
+                return View(req);
+            }
         }
 
         public IActionResult LogOut()
         {
-			RemoveCookie("UserKey");
-			return RedirectToAction("Index");
+            RemoveCookie("UserKey");
+            RemoveCookie("Token");
+            return RedirectToAction("Index");
         }
 
-        
+
         public string GetCookie(string key)
-		{
-			return Request.Cookies[key];
-		}
-		
-		public void SetCookie(string key, string value, int? expireTime)
-		{
-			CookieOptions option = new CookieOptions();
-			if (expireTime.HasValue)
-				option.Expires = DateTime.Now.AddDays(expireTime.Value);
-			else
-				option.Expires = DateTime.Now.AddDays(10);
-			Response.Cookies.Append(key, value, option);
-		}
-		
-		public void RemoveCookie(string key)
-		{
-			Response.Cookies.Delete(key);
-		}
+        {
+            return Request.Cookies[key];
+        }
+
+        public void SetCookie(string key, string value, int? expireTime)
+        {
+            CookieOptions option = new CookieOptions();
+            if (expireTime.HasValue)
+                option.Expires = DateTime.Now.AddDays(expireTime.Value);
+            else
+                option.Expires = DateTime.Now.AddDays(10);
+            Response.Cookies.Append(key, value, option);
+        }
+
+        public void RemoveCookie(string key)
+        {
+            Response.Cookies.Delete(key);
+        }
 
 
-	}
+    }
 }
