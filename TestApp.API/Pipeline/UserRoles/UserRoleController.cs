@@ -23,24 +23,24 @@ namespace TestApp.API.Pipeline.UserRoleRoles
         [HttpGet("{Id:int:min(1)}")]
         public async Task<IActionResult> GetUserRoleById([FromRoute] GetUserRoleByIdQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
         [HttpPost("listDs")]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUserRoleView>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListDsUserRole([FromBody] ListDsUserRoleQuery req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> AddUserRole([FromBody] AddUserRoleCommand req)
         {
-            var entityId = await _mediator.Send(req);
-            return Ok(entityId);
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
 

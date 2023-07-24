@@ -24,6 +24,7 @@
                                         <option value="@item.Key">@item.Value</option>
                                     }
                                 </select>
+                               
                             </div>
                         </div>
                     </div>
@@ -34,6 +35,7 @@
                             </div>
                             <div class="col-12">
                                 <input class="form-control" asp-for="Url" />
+                                <span asp-validation-for="Url" class="error-validation-message"></span>
                             </div>
                         </div>
                     </div>

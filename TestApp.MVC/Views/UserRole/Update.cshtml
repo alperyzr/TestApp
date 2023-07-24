@@ -20,9 +20,8 @@
                             </div>
                             <div class="col-12">
 
-                                <select asp-for="UserId" class="selectpicker" data-live-search="true" re>                                  
-                                        <option value="@Model.UserId" selected="selected">@Model.UserName</option>                                   
-                                </select>
+                                <input type="text" asp-for="UserId" class="form-control" readonly />
+                                
                             </div>
                         </div>
                     </div>
@@ -38,6 +37,7 @@
                                         <option value="@item.Key">@item.Value</option>
                                     }
                                 </select>
+                                <span asp-validation-for="RoleId" class="error-validation-message"></span>
                             </div>
                         </div>
                     </div>

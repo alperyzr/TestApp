@@ -5,6 +5,7 @@ using TestApp.Core.Application;
 using TestApp.Core.Application.Login.Queries;
 using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Extentions;
+using TestApp.MVC.Filters;
 using TestApp.MVC.Models;
 using TestApp.MVC.Services.Interfaces;
 using TestApp.Service;
@@ -30,42 +31,39 @@ namespace TestApp.MVC.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
+        [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Index(LoginQuery req)
         {
-            if (ModelState.IsValid)
+
+            if (!string.IsNullOrEmpty(req.Email))
+                req.Email = req.Email.ToLower();
+
+            var model = await _loginService.Login(req);
+            if (model.Payload != null)
             {
-                if (!string.IsNullOrEmpty(req.Email))
-                    req.Email = req.Email.ToLower();
-
-                var model = await _loginService.Login(req);
-                if (model.Payload != null)
+                if (model.Payload.Token != null)
                 {
-                    if (model.Payload.Token != null)
-                    {
-                        SetCookie("Token", model.Payload.Token, 10);
-                        HttpContext.Session.SetString("Token", model.Payload.Token);
-                        SetCookie("UserKey", model.Payload.UserName, 10);
-                        return RedirectToAction("Index", "Home");
+                    SetCookie("Token", model.Payload.Token, 10);
+                    HttpContext.Session.SetString("Token", model.Payload.Token);
+                    SetCookie("UserKey", model.Payload.UserName, 10);
+                    return RedirectToAction("Index", "Home");
 
-                    }
-                    else
-                    {
-                        TempData["errors"] = "Kullanıcı Bilgileri Yanlış !";
-                        return View(req);
-                    }
                 }
                 else
                 {
-                    TempData["errors"] = model.Message;
+                    TempData["errors"] = "Kullanıcı Bilgileri Yanlış !";
                     return View(req);
                 }
-               
             }
             else
-            {               
+            {
+                TempData["errors"] = model.Message;
                 return View(req);
             }
+
+
+
         }
 
         public IActionResult LogOut()

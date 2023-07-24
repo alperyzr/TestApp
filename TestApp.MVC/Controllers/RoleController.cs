@@ -5,6 +5,7 @@ using TestApp.MVC.Services.Interfaces;
 using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.ViewModels;
+using TestApp.MVC.Filters;
 
 namespace TestApp.MVC.Controllers
 {
@@ -33,6 +34,7 @@ namespace TestApp.MVC.Controllers
             return View(new RoleView());
         }
 
+        [ValidationFilter]
         [HttpPost]
         [CommandPermission(Command = typeof(AddRoleCommand))]
         public async Task<IActionResult> Add([FromForm] AddRoleCommand req)
@@ -47,7 +49,7 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "Role");
+                return RedirectToAction("Add", "Role",req);
             }
 
         }
@@ -64,6 +66,7 @@ namespace TestApp.MVC.Controllers
             return View(model.Payload);
         }
 
+        [ValidationFilter]
         [HttpPost]
         [CommandPermission(Command = typeof(UpdateRoleCommand))]
         public async Task<IActionResult> Update([FromRoute] int Id,
@@ -78,7 +81,7 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "Role");
+                return RedirectToAction("Update", "Role", req);
             }
 
         }

@@ -1,4 +1,5 @@
 using Bentas.O2.WebExtensions.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -10,9 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddKendo();
 builder.Services.AddSession();
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Default Validation mesajlarýný engellemke için Kullanýlýr
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 builder.Services.AddScoped<HttpClient>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -22,15 +27,14 @@ builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUrlShortService, UrlShortService>();
 
-
+//Türkçe desteði için kullanýlýr
 builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Latin1Supplement, UnicodeRanges.LatinExtendedA }));
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -42,6 +46,7 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
 
+//Controller ve Action adý belirtmeden direkt parametre alabilmesini saðlar
 app.MapControllerRoute(
     name:"ShortUrl",
     pattern:"{ShortUrl}",

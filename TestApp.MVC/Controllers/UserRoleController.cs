@@ -7,6 +7,7 @@ using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
+using TestApp.MVC.Filters;
 using TestApp.MVC.Services.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -52,22 +53,24 @@ namespace TestApp.MVC.Controllers
             return View(new UserRoleView());
         }
 
+        
         [HttpPost]
         [CommandPermission(Command = typeof(AddUserRoleCommand))]
         public async Task<IActionResult> Add([FromForm] AddUserRoleCommand req)
         {
-
-            var model = await _userRoleService.AddUserRole(req);
-            if (model.Code == "200")
-            {
-                TempData["success"] = model.Message;
-                return RedirectToAction("Index", "UserRole");
-            }
-            else
-            {
-                TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "UserRole");
-            }
+            
+                var model = await _userRoleService.AddUserRole(req);
+                if (model.Code == "200")
+                {
+                    TempData["success"] = model.Message;
+                    return RedirectToAction("Index", "UserRole");
+                }
+                else
+                {
+                    TempData["errors"] = model.Message;
+                    return RedirectToAction("Add", "UserRole", req);
+                }
+           
 
         }
 
@@ -85,22 +88,31 @@ namespace TestApp.MVC.Controllers
             return View(model.Payload);
         }
 
+       
         [HttpPost]
         [CommandPermission(Command = typeof(UpdateUserRoleCommand))]
         public async Task<IActionResult> Update([FromRoute] int Id,
                                                 [FromForm] UpdateUserRoleCommand req)
         {
-            var model = await _userRoleService.UpdateUserRole(Id, req);
-            if (model.Code == "200")
+            if (ModelState.IsValid)
             {
-                TempData["success"] = model.Message;
-                return RedirectToAction("Index", "UserRole");
+                var model = await _userRoleService.UpdateUserRole(Id, req);
+                if (model.Code == "200")
+                {
+                    TempData["success"] = model.Message;
+                    return RedirectToAction("Index", "UserRole");
+                }
+                else
+                {
+                    TempData["errors"] = model.Message;
+                    return RedirectToAction("Update", "UserRole", req);
+                }
             }
             else
             {
-                TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "UserRole");
+                return View(req);
             }
+            
 
         }
 

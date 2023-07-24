@@ -13,6 +13,7 @@
                             </div>
                             <div class="col-12">
                                 <input class="form-control" asp-for="FirstName" />
+                                <span asp-validation-for="FirstName" class="error-validation-message"></span>
                             </div>
                         </div>
                     </div>
@@ -23,6 +24,7 @@
                             </div>
                             <div class="col-12">
                                 <input class="form-control" asp-for="LastName" />
+                                <span asp-validation-for="LastName" class="error-validation-message"></span>
                             </div>
                         </div>
                     </div>
@@ -35,6 +37,7 @@
                             </div>
                             <div class="col-12">
                                 <input class="form-control" asp-for="Email" />
+                                <span asp-validation-for="Email" class="error-validation-message"></span>
                             </div>
                         </div>
                     </div>
@@ -45,6 +48,7 @@
                             </div>
                             <div class="col-12">
                                 <input class="form-control" asp-for="Password" />
+                                <span asp-validation-for="Password" class="error-validation-message"></span>
                             </div>
                         </div>
                     </div>
@@ -56,7 +60,7 @@
                                 <span>Doğum Tarihi</span>
                             </div>
                             <div class="col-12">
-                                <input class="form-control" asp-for="BirthDate" />
+                                <input type="date" class="form-control" asp-for="BirthDate" />
                             </div>
                         </div>
                     </div>

@@ -24,10 +24,12 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
 
         public async Task<ServiceResult<UserRoleDto>> Handle(AddUserRoleCommand request, CancellationToken cancellationToken)
         {
-            var checkDataUser = await _context.Users.FindAsync(request.UserId);
-            var checkDataRole = await _context.Roles.FindAsync(request.RoleId);
-            if (checkDataUser == null && checkDataRole == null)
-                ServiceResult<UserRoleDto>.WarningResult(null, "Kullanıcı ve ya Rol bulunamadı.", "400");
+            var checkDataUser = await _context.Users.FindAsync(request.UserId);          
+            if (checkDataUser == null)
+                return ServiceResult<UserRoleDto>.WarningResult(null, "Kullanıcı bulunamadı.");
+
+            if (request.SelectedRoles == null || request.SelectedRoles.Count() == 0)
+                return ServiceResult<UserRoleDto>.WarningResult(null, "Rol Seçilmesi Zorunludur.");
 
             UserRole model = _mapper.Map<UserRole>(request);
             

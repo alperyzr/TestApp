@@ -12,5 +12,6 @@ namespace TestApp.Core.Application.Login.ViewModels
         public DateTime Expiration { get; set; }
         public string RefreshToken { get; set; }
         public string UserName { get; set; }
+        public string ImagePath { get; set; }
     }
 }

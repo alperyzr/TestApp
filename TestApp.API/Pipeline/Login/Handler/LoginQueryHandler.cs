@@ -34,13 +34,16 @@ namespace TestApp.API.Pipeline.Login.Handler
 		{
 			var model = _context.Users.FirstOrDefault(x => x.Email == request.Email && x.Password == request.Password);
 			if (model == null)
-				return ServiceResult<AccessToken>.WarningResult(null,"Kullanıcı Bulunamadı","400");
+				return ServiceResult<AccessToken>.WarningResult(null,"Kullanıcı Bulunamadı");
 
 			
             AccessToken accessToken = _tokenService.CreateAccessToken(_mapper.Map<User>(model));
-			model.RefreshToken = accessToken.RefreshToken;
+            accessToken.UserName = model.FirstName + " " + model.LastName;
+            accessToken.ImagePath = model.ImagePath;
+
+            model.RefreshToken = accessToken.RefreshToken;
 			model.RefreshTokenEndDate = accessToken.Expiration;
-			accessToken.UserName = model.FirstName + " " + model.LastName;
+			
 
 			_context.Users.Update(model);
             await _context.SaveChangesAsync();

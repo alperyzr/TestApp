@@ -30,6 +30,8 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
 
             if (checkDataUser == null)
                 return ServiceResult<UrlShortDto>.WarningResult(null, "Kullanıcı Buluunamadı");
+            if (request.Url == null)
+                return ServiceResult<UrlShortDto>.WarningResult(null, "Url Boş Olamaz");
 
             UrlShort model = _mapper.Map<UrlShort>(request);
             model.CreatedDate = DateTime.Now;

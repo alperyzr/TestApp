@@ -10,6 +10,7 @@ using TestApp.MVC.Services;
 using System.Text.Json;
 using TestApp.Repository;
 using Microsoft.EntityFrameworkCore;
+using TestApp.MVC.Filters;
 
 namespace TestApp.MVC.Controllers
 {
@@ -46,6 +47,7 @@ namespace TestApp.MVC.Controllers
             return View(new UrlShortView());
         }
 
+       
         [HttpPost]
         [CommandPermission(Command = typeof(AddUrlShortCommand))]
         public async Task<IActionResult> Add([FromForm] AddUrlShortCommand req)
@@ -60,7 +62,7 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "UrlShort");
+                return RedirectToAction("Add", "UrlShort");
             }
 
         }
@@ -77,6 +79,7 @@ namespace TestApp.MVC.Controllers
             return View(model.Payload);
         }
 
+        
         [HttpPost]
         [CommandPermission(Command = typeof(UpdateUrlShortCommand))]
         public async Task<IActionResult> Update([FromRoute] int Id,
@@ -91,7 +94,7 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "UrlShort");
+                return RedirectToAction("Update", "UrlShort",req);
             }
 
         }

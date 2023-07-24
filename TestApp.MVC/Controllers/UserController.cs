@@ -12,6 +12,7 @@ using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;
+using TestApp.MVC.Filters;
 using TestApp.MVC.Services.Interfaces;
 using TestApp.Service;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -44,6 +45,7 @@ namespace TestApp.MVC.Controllers
             return View(new UserView());
         }
 
+        [ValidationFilter]
         [HttpPost]
         [CommandPermission(Command = typeof(AddUserCommand))]
         public async Task<IActionResult> Add([FromForm] AddUserCommand req)
@@ -58,7 +60,7 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Add", "User",req);
             }
 
         }
@@ -75,6 +77,7 @@ namespace TestApp.MVC.Controllers
             return View(model.Payload);
         }
 
+        [ValidationFilter]
         [HttpPost]
         [CommandPermission(Command = typeof(UpdateUserCommand))]
         public async Task<IActionResult> Update([FromRoute] int Id, 
@@ -89,7 +92,7 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Update", "User",req);
             }
 
         }

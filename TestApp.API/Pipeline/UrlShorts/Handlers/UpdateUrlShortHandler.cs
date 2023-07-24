@@ -27,6 +27,8 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
             if (chechUser == null )
                 return ServiceResult<UrlShortDto>.WarningResult(null, "Kullanıcı Bulunamadı");
 
+            if (request.Url == null)
+                return ServiceResult<UrlShortDto>.WarningResult(null, "Url Boş Olamaz");
 
             request.UpdatedDate = DateTime.Now;
             _context.UrlShorts.Update(_mapper.Map<UrlShort>(request));
