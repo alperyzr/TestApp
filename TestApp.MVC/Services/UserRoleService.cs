@@ -53,7 +53,7 @@ namespace TestApp.MVC.Services
 
         public async Task<ServiceResult<UserRoleDto>> UpdateUserRole(int Id, UpdateUserRoleCommand req)
         {
-            var model = await _httpClient.CustomPutAsync<ServiceResult<UserRoleDto>>($"{ApiUrl}/{ApiClient.UpdateUserRole}/" + req.Id, req);
+            var model = await _httpClient.CustomPutAsync<ServiceResult<UserRoleDto>>($"{ApiUrl}/{ApiClient.UpdateUserRole}/" + Id, req);
             return model;
         }
 

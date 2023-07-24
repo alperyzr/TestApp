@@ -16,10 +16,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<HttpClient>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<ILoginService, LoginService>();  
-builder.Services.AddScoped<IUserService, UserService>();  
-builder.Services.AddScoped<IUserRoleService, UserRoleService>();  
-builder.Services.AddScoped<IRoleService, RoleService>();  
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUrlShortService, UrlShortService>();
 
 
@@ -41,8 +41,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
+name: "default",
+pattern: "{controller=Login}/{action=Index}/{id?}");
+
+
+
 
 app.Run();

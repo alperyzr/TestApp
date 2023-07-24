@@ -49,8 +49,8 @@ namespace TestApp.API.Pipeline.UserRoleRoles
                                                         [FromBody] UpdateUserRoleCommand req)
         {
             req.Id = Id;
-            await _mediator.Send(req);
-            return Ok();
+            var model = await _mediator.Send(req);
+            return Ok(model);
         }
 
         [HttpDelete("{Id:int:min(1)}")]

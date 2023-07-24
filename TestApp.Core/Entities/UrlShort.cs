@@ -11,7 +11,7 @@ namespace TestApp.Core.Entities
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Url { get; set; }
-        public string UrlKey { get; set; }
+        public string ShortUrl { get; set; }
         public string Description { get; set; }
         public string ToRedirectUrl { get; set; }
         public DateTime RedirectUrlDate { get; set; }

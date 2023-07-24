@@ -28,7 +28,7 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
                ToRedirectUrl = x.ToRedirectUrl,
                UpdatedDate = x.UpdatedDate,
                Url = x.Url,
-               UrlKey = x.UrlKey,
+               ShortUtl = x.ShortUrl,
                UserId = x.UserId,
                UserName = x.User.FirstName + " " + x.User.LastName
             });

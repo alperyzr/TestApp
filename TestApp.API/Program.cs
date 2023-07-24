@@ -1,6 +1,11 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using TestApp.Core.Application.UrlShorts.ViewModels;
+using TestApp.Core.Entities;
 using TestApp.Repository;
 using TestApp.Service.Mapping;
 
@@ -8,13 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMediatR(typeof(Program));
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(x =>
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
     //appsettingsten okuyacaðý kýsým
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
 
-
+builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Latin1Supplement, UnicodeRanges.LatinExtendedA }));
 builder.Services.AddAutoMapper(options =>
 {
     options.AddProfile<MappingProfile>();
@@ -41,5 +46,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

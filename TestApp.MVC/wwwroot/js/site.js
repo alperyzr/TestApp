@@ -49,7 +49,8 @@ function AreYouSureDelete(id, ajaxPath) {
         reverseButtons: true,
     }).then((result) => {
 
-        if (result.isConfirmed) {           
+        if (result.isConfirmed) {
+            debugger;
             var url = ajaxPath + "/" + id;
             $.ajax({
                 type: "GET",

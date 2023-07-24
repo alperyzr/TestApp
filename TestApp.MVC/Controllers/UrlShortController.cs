@@ -7,21 +7,27 @@ using TestApp.Core.Application.UrlShorts.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.MVC.Services;
+using System.Text.Json;
+using TestApp.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace TestApp.MVC.Controllers
 {
+    
     public class UrlShortController : Controller
     {
         private readonly IUrlShortService _urlShortService;
         private readonly IUserService _userService;
+        
 
         public UrlShortController(IUrlShortService urlShortService,
             IUserService userService)
         {
             _urlShortService = urlShortService;
-            _userService = userService;
+            _userService = userService;            
         }
 
+        [Route("UrlShort/Index")]
         [CommandPermission(Command = typeof(ListDsUrlShortQuery))]
         public async Task<IActionResult> Index()
         {

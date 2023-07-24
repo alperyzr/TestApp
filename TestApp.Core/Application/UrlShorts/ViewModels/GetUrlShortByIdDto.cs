@@ -12,7 +12,7 @@ namespace TestApp.Core.Application.UrlShorts.ViewModels
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Url { get; set; }
-        public string UrlKey { get; set; }
+        public string ShortUtl { get; set; }
         public string Description { get; set; }
         public string ToRedirectUrl { get; set; }
         public DateTime RedirectUrlDate { get; set; }

@@ -30,13 +30,9 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
                 ServiceResult<UserRoleDto>.WarningResult(null, "Kullanıcı ve ya Rol bulunamadı.", "400");
 
             UserRole model = _mapper.Map<UserRole>(request);
-            var userRoles = await _context.UserRoles.Where(x => x.UserId == model.UserId).ToListAsync();
-            foreach (var item in userRoles)
-            {
-                _context.Remove(item);
-            }
             
-            await _context.SaveChangesAsync();
+            
+            
 
             foreach (var item in request.SelectedRoles)
             {               
@@ -51,8 +47,16 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
                     
                 });
             }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult<UserRoleDto>.ErrorResult(null,"Her Kullanıcıda Seçilen Rol Bir Defa Eklenebilir.");
+            }
             
-            await _context.SaveChangesAsync();
             return ServiceResult<UserRoleDto>.SuccessResult(_mapper.Map<UserRoleDto>(model));
         }
     }

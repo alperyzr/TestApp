@@ -54,6 +54,7 @@ namespace TestApp.Service
         public static string GetUrlShortById = "urlshort/GetUrlShortById";
         public static string ListDsUrlShort = "urlshort/listDs";
         public static string GetAllUrlShorts = "urlshort/GetAllUrlShorts";
+        public static string GetUrlShortInfoByShortUrl = "urlshort/GetUrlShortInfoByShortUrl";
         #endregion
 
     }

@@ -18,6 +18,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TestApp.MVC.Controllers
 {
+    
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -27,6 +28,7 @@ namespace TestApp.MVC.Controllers
             _userService = userService;
         }
 
+        [Route("User/Index")]
         [CommandPermission(Command = typeof(ListDsUserQuery))]
         public async Task<IActionResult> Index()
         {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
@@ -23,10 +24,24 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
         public async Task<ServiceResult<UserRoleDto>> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
         {
             var chechUser = await _context.Users.FindAsync(request.UserId);
-            var chechRole = await _context.Roles.FindAsync(request.RoleId);
-           
-            if (chechUser == null || chechRole == null)          
-                return ServiceResult<UserRoleDto>.WarningResult(null,"Kullanıcı ve ya Rol Bulunamadı");
+
+            if (chechUser == null)
+            {
+                return ServiceResult<UserRoleDto>.WarningResult(null, "Kullanıcı Bulunamadı");
+            }
+
+            var roleIds = request.SelectedRoles.Select(x => int.Parse(x)).ToArray();
+
+            var roles = await _context.Roles.Where(role => roleIds.Any(x => role.Id == x)).ToListAsync();
+
+            if (!roles.Any() || roles.Count() != roleIds.Length)
+                return ServiceResult<UserRoleDto>.WarningResult(null, "Rol Bulunamadı");
+
+
+           var userRoles = await _context.UserRoles.Where(userRole => userRole.UserId == request.UserId).ToListAsync(); // kişinin güncel rolleri
+
+
+
 
 
             request.UpdatedDate = DateTime.Now;
@@ -34,5 +49,7 @@ namespace TestApp.API.Pipeline.UserRoles.Handlers
             await _context.SaveChangesAsync();
             return ServiceResult<UserRoleDto>.SuccessResult(_mapper.Map<UserRoleDto>(request));
         }
+
+       
     }
 }

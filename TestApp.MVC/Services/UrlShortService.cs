@@ -63,5 +63,11 @@ namespace TestApp.MVC.Services
             var model = await _httpClient.CustomGetAsync<ServiceResult<List<UrlShortDto>>>($"{ApiUrl}/{ApiClient.GetAllUrlShorts}", req);
             return model;
         }
+
+        public async Task<ServiceResult<UrlShortDto>> GetUrlShortInfoByShortUrl(GetUrlShortInfoByShortUrlQuery req)
+        {
+            var model = await _httpClient.CustomGetAsync<ServiceResult<UrlShortDto>>($"{ApiUrl}/{ApiClient.GetUrlShortInfoByShortUrl}", req);
+            return model;
+        }
     }
 }

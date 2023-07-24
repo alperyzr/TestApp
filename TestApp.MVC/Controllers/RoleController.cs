@@ -17,6 +17,7 @@ namespace TestApp.MVC.Controllers
             _roleService = roleService;
         }
 
+        [Route("Role/Index")]
         [CommandPermission(Command = typeof(ListDsRoleQuery))]
         public async Task<IActionResult> Index()
         {
@@ -82,6 +83,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
+        [HttpGet]
         [CommandPermission(Command = typeof(DeleteRoleCommand))]
         public async Task<IActionResult> Delete([FromRoute] int Id,
                                                  [FromQuery] DeleteRoleCommand req)

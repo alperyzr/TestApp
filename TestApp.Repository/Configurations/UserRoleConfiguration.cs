@@ -20,6 +20,7 @@ namespace TestApp.Repository.Configurations
             builder.Property(x=>x.IsDeleted).HasDefaultValue(false);
             builder.HasOne(x => x.User);
             builder.HasOne(x => x.Role);
+            builder.HasIndex(x => new {x.UserId, x.RoleId}).IsUnique();
             
             builder.ToTable("UserRoles");
         }

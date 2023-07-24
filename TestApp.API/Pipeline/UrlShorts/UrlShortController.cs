@@ -69,5 +69,12 @@ namespace TestApp.API.Pipeline.UrlShorts
             var model = await _mediator.Send(req);
             return Ok(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUrlShortInfoByShortUrl([FromBody] GetUrlShortInfoByShortUrlQuery req)
+        {
+            var model = await _mediator.Send(req);
+            return Ok(model);
+        }
     }
 }

@@ -15,5 +15,6 @@ namespace TestApp.MVC.Services.Interfaces
         Task<ServiceResult<UrlShortDto>> GetUrlShortById(GetUrlShortByIdQuery req);
         Task<BDataSourceResult<ListDsUrlShortView>> ListDsUrlShortQuery(ListDsUrlShortQuery req);
         Task<ServiceResult<List<UrlShortDto>>> GetAllUrlShorts(GetAllUrlShortsQuery req);
+        Task<ServiceResult<UrlShortDto>> GetUrlShortInfoByShortUrl(GetUrlShortInfoByShortUrlQuery req);
     }
 }

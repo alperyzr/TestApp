@@ -15,15 +15,18 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public GetAllUrlShortsHandler(AppDbContext context, IMapper mapper)
+        public GetAllUrlShortsHandler(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<ServiceResult<List<UrlShortDto>>> Handle(GetAllUrlShortsQuery request, CancellationToken cancellationToken)
         {
+            var path = _configuration.GetValue<string>("ClientUrl");
 
             var response = await _context.UrlShorts.Include(x=>x.User).OrderByDescending(x => x.Id).Select(x=> new UrlShortDto
             {
@@ -36,7 +39,7 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
                 ToRedirectUrl = x.ToRedirectUrl,
                 UpdatedDate = x.UpdatedDate,
                 Url = x.Url,
-                UrlKey = x.UrlKey,
+                ShortUrl = $"{path}{x.ShortUrl}",
                 UserName = x.User.FirstName + " " + x.User.LastName,
                 UserId = x.UserId
             }).ToListAsync();
