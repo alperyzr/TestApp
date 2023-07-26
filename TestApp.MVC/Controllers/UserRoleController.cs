@@ -1,15 +1,10 @@
-﻿using Bentas.O2.Core.Attributes;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using TestApp.Core.Application;
+﻿using Microsoft.AspNetCore.Mvc;
 using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
-using TestApp.MVC.Filters;
 using TestApp.MVC.Services.Interfaces;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TestApp.MVC.Controllers
 {
@@ -29,8 +24,7 @@ namespace TestApp.MVC.Controllers
             _userService = userService;
         }
 
-        [Route("UserRole/Index")]
-        [CommandPermission(Command = typeof(ListDsUserRoleQuery))]
+        [HttpGet("UserRole/Index")]                
         public async Task<IActionResult> Index()
         {
             var model = await _userRoleService.GetAllUserRoles(new GetAllUserRolesQuery());
@@ -38,8 +32,7 @@ namespace TestApp.MVC.Controllers
         }
 
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(AddUserRoleCommand))]
+        [HttpGet]        
         public async Task<IActionResult> Add()
         {
             var users = await _userService.GetAllUser(new GetAllUsersQuery());
@@ -54,8 +47,7 @@ namespace TestApp.MVC.Controllers
         }
 
         
-        [HttpPost]
-        [CommandPermission(Command = typeof(AddUserRoleCommand))]
+        [HttpPost]        
         public async Task<IActionResult> Add([FromForm] AddUserRoleCommand req)
         {
             
@@ -74,8 +66,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(UpdateUserRoleCommand))]
+        [HttpGet]        
         public async Task<IActionResult> Update(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
@@ -89,8 +80,7 @@ namespace TestApp.MVC.Controllers
         }
 
        
-        [HttpPost]
-        [CommandPermission(Command = typeof(UpdateUserRoleCommand))]
+        [HttpPost]        
         public async Task<IActionResult> Update([FromRoute] int Id,
                                                 [FromForm] UpdateUserRoleCommand req)
         {
@@ -116,7 +106,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [CommandPermission(Command = typeof(DeleteUserRoleCommand))]
+        
         public async Task<IActionResult> Delete([FromRoute] int Id,
                                                  [FromQuery] DeleteUserRoleCommand req)
         {
@@ -135,7 +125,7 @@ namespace TestApp.MVC.Controllers
             }
         }
 
-        [CommandPermission(Command = typeof(GetUserRoleByIdQuery))]
+        
         public async Task<IActionResult> Detail(int? id)
         {
             if (!id.HasValue || id.Value <= 0)

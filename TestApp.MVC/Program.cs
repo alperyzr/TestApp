@@ -1,3 +1,6 @@
+using Bentas.O2.Core;
+using Bentas.O2.Core.Interfaces;
+using Bentas.O2.TagHelpers;
 using Bentas.O2.WebExtensions.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -26,6 +29,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUrlShortService, UrlShortService>();
+builder.Services.AddSingleton<IJsonHelper, JsonNetHelper>();
+
 
 //Türkçe desteði için kullanýlýr
 builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Latin1Supplement, UnicodeRanges.LatinExtendedA }));

@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using System.Net;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 using TestApp.Core.Application.UrlShorts.Queries;
 using TestApp.MVC.Models;
 using TestApp.MVC.Services.Interfaces;
@@ -24,7 +19,7 @@ namespace TestApp.MVC.Controllers
             _urlShortService = urlShortService;
         }
 
-        [Route("Home/Index")]
+        [HttpGet("Home/Index")]
         public IActionResult Index()
         {
             return View();

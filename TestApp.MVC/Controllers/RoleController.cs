@@ -1,6 +1,4 @@
-﻿using Bentas.O2.Core.Attributes;
-using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using Microsoft.AspNetCore.Mvc;
 using TestApp.MVC.Services.Interfaces;
 using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.Roles.Commands;
@@ -18,8 +16,7 @@ namespace TestApp.MVC.Controllers
             _roleService = roleService;
         }
 
-        [Route("Role/Index")]
-        [CommandPermission(Command = typeof(ListDsRoleQuery))]
+        [HttpGet("Role/Index")]                
         public async Task<IActionResult> Index()
         {
             var model = await _roleService.GetAllRole(new GetAllRolesQuery());
@@ -27,16 +24,14 @@ namespace TestApp.MVC.Controllers
         }
 
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(AddRoleCommand))]
+        [HttpGet]       
         public async Task<IActionResult> Add()
         {
             return View(new RoleView());
         }
 
         [ValidationFilter]
-        [HttpPost]
-        [CommandPermission(Command = typeof(AddRoleCommand))]
+        [HttpPost]       
         public async Task<IActionResult> Add([FromForm] AddRoleCommand req)
         {
 
@@ -54,8 +49,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(UpdateRoleCommand))]
+        [HttpGet]       
         public async Task<IActionResult> Update(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
@@ -67,8 +61,7 @@ namespace TestApp.MVC.Controllers
         }
 
         [ValidationFilter]
-        [HttpPost]
-        [CommandPermission(Command = typeof(UpdateRoleCommand))]
+        [HttpPost]       
         public async Task<IActionResult> Update([FromRoute] int Id,
                                                 [FromForm] UpdateRoleCommand req)
         {
@@ -86,8 +79,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(DeleteRoleCommand))]
+        [HttpGet]      
         public async Task<IActionResult> Delete([FromRoute] int Id,
                                                  [FromQuery] DeleteRoleCommand req)
         {
@@ -105,8 +97,7 @@ namespace TestApp.MVC.Controllers
                 return Json(model);
             }
         }
-
-        [CommandPermission(Command = typeof(GetRoleByIdQuery))]
+       
         public async Task<IActionResult> Detail(int? id)
         {
             if (!id.HasValue || id.Value <= 0)

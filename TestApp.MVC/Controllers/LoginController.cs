@@ -1,15 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http;
-using TestApp.Core.Application;
 using TestApp.Core.Application.Login.Queries;
-using TestApp.Core.Application.Users.ViewModels;
-using TestApp.MVC.Extentions;
 using TestApp.MVC.Filters;
-using TestApp.MVC.Models;
 using TestApp.MVC.Services.Interfaces;
-using TestApp.Service;
-using static MassTransit.ValidationResultExtensions;
+
 
 namespace TestApp.MVC.Controllers
 {

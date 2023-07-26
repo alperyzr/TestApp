@@ -1,4 +1,5 @@
-﻿@using TestApp.Core.Application.Users.ViewModels;
+﻿
+@*@using TestApp.Core.Application.Users.ViewModels;
 @model List<UserDto>
 
     <div class="card">
@@ -50,3 +51,128 @@
 
 
 
+*@
+
+
+
+
+
+
+
+
+@using Kendo.Mvc.UI;
+@using TestApp.Core.Application.Users.ViewModels;
+@model UserFilterView
+
+<kendo-grid name="Grid" navigatable="true" on-sort="onSort">
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                server-operation="false"
+                batch="true"
+                on-error="error_handler">
+        <schema data="Data" total="Total">
+            <model id="Id">
+                <fields>
+                    <field name="Id" type="number" editable="false"></field>
+                    <field name="FirstName" type="string"></field>
+                    <field name="LastName" type="string"></field>                   
+                </fields>
+            </model>
+        </schema>
+        <transport>
+            <read url="@Url.Action("ListDs", "User")" />
+            <update url="@Url.Action("Update", "User")" />
+            <create url="@Url.Action("Add", "User")" />
+        </transport>
+    </datasource>
+    <columns>
+        <column field="Id" width="320" title="Id" />
+        <column field="FirstName" title="Ad" width="150" />
+        <column field="LastName" title="SoyAd" width="150" min-screen-width="800" />
+        
+        <column width="160">
+            <commands>
+                <column-command text="Delete" name="destroy"></column-command>
+            </commands>
+        </column>
+    </columns>
+    <toolbar>
+        <toolbar-button name="create"></toolbar-button>
+        <toolbar-button name="save"></toolbar-button>
+    </toolbar>
+    <editable mode="incell" />
+    <pageable enabled="true" />
+    <sortable enabled="true" />
+    <groupable enabled="true" />
+    <filterable enabled="true" />
+    <scrollable enabled="true" />
+</kendo-grid>
+
+<script type="text/javascript">
+    
+
+ 
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    
+    function onSort(e) {
+        var gridData = e.sender.dataSource.data()
+        gridData.forEach(function (element) {
+            if (!element.Id) {
+                e.preventDefault()
+            }
+        });
+    }
+</script>
+
+
+
+
+@*<bt-viewmodel name="WsUrl.Index">
+    <bt-localizer>
+        <bt-localizer-text key="İşlem" />
+    </bt-localizer>
+
+    <bt-container layout="full" padding-top="P5">
+        <bt-header>
+            <h4>Kullanıcılar</h4>
+        </bt-header>
+
+        <bt-datagrid Id="OnlineTaliGrid"
+                     model="typeof(ListDsUserView)"
+                     create-action="@Url.Action("Add","User")"
+                     read-action="@Url.Action("ListDs","User")"
+                     update-action="@Url.Action("Update","User")"
+                     destroy-action="@Url.Action("Delete","User")"
+                     new-record="true"
+                     pageable="true"
+                     editable="None"
+                     method="POST"
+                     filterable="false"
+                     page-size="20">
+
+            <bt-datagrid-allcolumns />
+            <bt-datagrid-column field="Id" visible="true" />
+            <bt-datagrid-column field="FirstName" visible="true" />
+            <bt-datagrid-column field="LastName" visible="true" />
+            
+            <bt-datagrid-column title="İşlemler" charlength="6">
+                <bt-datagrid-command name="detail" click="$page$.detail" icon-class="Details"></bt-datagrid-command>
+                <bt-datagrid-command name="edit" click="$page$.edit"></bt-datagrid-command>
+                <bt-datagrid-command name="sil" click="$page$.delete" icon-class="Close"></bt-datagrid-command>
+            </bt-datagrid-column>
+        </bt-datagrid>
+    </bt-container>
+</bt-viewmodel>*@

@@ -28,7 +28,7 @@ namespace TestApp.API.Pipeline.Users
 
         [HttpPost]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUserView>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> ListDsUser([FromBody] ListDsUserQuery req)
+        public async Task<IActionResult> ListDs([FromBody] ListDsUserQuery req)
         {
             var model = await _mediator.Send(req);
             return Ok(model);

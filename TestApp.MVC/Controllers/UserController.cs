@@ -1,58 +1,65 @@
-﻿
-using Bentas.O2.Core.Attributes;
-using Bentas.O2.Core.Interfaces;
-using Bentas.O2.DynamicLinq;
-using Bentas.O2.WebExtensions.Interfaces;
-using Bentas.O2.WebExtensions.Models;
-using Bentas.O2.WebExtensions.Services;
+﻿using Bentas.O2.DynamicLinq;
 using Kendo.Mvc.UI;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Filters;
 using TestApp.MVC.Services.Interfaces;
-using TestApp.Service;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 
 namespace TestApp.MVC.Controllers
 {
-    
+    //[Authorize("Admin")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly Bentas.O2.Core.Interfaces.IJsonHelper _jsonHelper;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, Bentas.O2.Core.Interfaces.IJsonHelper jsonHelper)
         {
             _userService = userService;
+            _jsonHelper = jsonHelper;
         }
 
-        [Route("User/Index")]
-        [CommandPermission(Command = typeof(ListDsUserQuery))]
-        public async Task<IActionResult> Index()
+        //[Route("User/Index")]
+        //[CommandPermission(Command = typeof(ListDsUserQuery))]
+        //public async Task<IActionResult> Index()
+        //{
+        //    var model = await _userService.GetAllUser(new GetAllUsersQuery());
+        //    return View(model.Payload);
+        //}
+
+        [HttpGet("User/Index")]              
+        public IActionResult Index()
         {
-            var model = await _userService.GetAllUser(new GetAllUsersQuery());
-            return View(model.Payload);
+            return View(new UserFilterView());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UserFilterView filterView)
+        {
+            var filter = _jsonHelper.Deserialize<ListDsUserQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+            filter.FilterView = filterView;
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(AddUserCommand))]
+            var response = await _userService.ListDsUserQuery(filter);
+
+            return Json(response);
+        }
+
+        [HttpGet]      
         public async Task<IActionResult> Add()
         {
             return View(new UserView());
         }
 
         [ValidationFilter]
-        [HttpPost]
-        [CommandPermission(Command = typeof(AddUserCommand))]
+        [HttpPost]       
         public async Task<IActionResult> Add([FromForm] AddUserCommand req)
         {
 
             var model = await _userService.AddUser(req);
-            if(model.Code == "200")
+            if (model.Code == "200")
             {
                 TempData["success"] = model.Message;
                 return RedirectToAction("Index", "User");
@@ -60,13 +67,12 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Add", "User",req);
+                return RedirectToAction("Add", "User", req);
             }
 
         }
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(UpdateUserCommand))]
+        [HttpGet]       
         public async Task<IActionResult> Update(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
@@ -78,9 +84,8 @@ namespace TestApp.MVC.Controllers
         }
 
         [ValidationFilter]
-        [HttpPost]
-        [CommandPermission(Command = typeof(UpdateUserCommand))]
-        public async Task<IActionResult> Update([FromRoute] int Id, 
+        [HttpPost]       
+        public async Task<IActionResult> Update([FromRoute] int Id,
                                                 [FromForm] UpdateUserCommand req)
         {
             var model = await _userService.UpdateUser(Id, req);
@@ -92,12 +97,11 @@ namespace TestApp.MVC.Controllers
             else
             {
                 TempData["errors"] = model.Message;
-                return RedirectToAction("Update", "User",req);
+                return RedirectToAction("Update", "User", req);
             }
 
         }
-
-        [CommandPermission(Command = typeof(DeleteUserCommand))]
+       
         public async Task<IActionResult> Delete([FromRoute] int Id,
                                                  [FromQuery] DeleteUserCommand req)
         {
@@ -116,15 +120,15 @@ namespace TestApp.MVC.Controllers
             }
         }
 
-        [CommandPermission(Command = typeof(GetUserByIdQuery))]
+        
         public async Task<IActionResult> Detail(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
                 return RedirectToAction("Index", "User");
 
-            var model = await _userService.GetUserById(new GetUserByIdQuery { Id = (int)id});
+            var model = await _userService.GetUserById(new GetUserByIdQuery { Id = (int)id });
             if (model.Code == "200")
-            {              
+            {
                 return View(model.Payload);
             }
             else
@@ -132,7 +136,7 @@ namespace TestApp.MVC.Controllers
                 TempData["errors"] = model.Message;
                 return RedirectToAction("Index", "User");
             }
-            
+
         }
 
     }

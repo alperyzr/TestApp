@@ -1,16 +1,10 @@
-﻿using Bentas.O2.Core.Attributes;
-using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using Microsoft.AspNetCore.Mvc;
 using TestApp.MVC.Services.Interfaces;
 using TestApp.Core.Application.UrlShorts.Queries;
 using TestApp.Core.Application.UrlShorts.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
-using TestApp.MVC.Services;
-using System.Text.Json;
-using TestApp.Repository;
-using Microsoft.EntityFrameworkCore;
-using TestApp.MVC.Filters;
+
 
 namespace TestApp.MVC.Controllers
 {
@@ -28,8 +22,7 @@ namespace TestApp.MVC.Controllers
             _userService = userService;            
         }
 
-        [Route("UrlShort/Index")]
-        [CommandPermission(Command = typeof(ListDsUrlShortQuery))]
+        [HttpGet("UrlShort/Index")]                
         public async Task<IActionResult> Index()
         {
             var model = await _urlShortService.GetAllUrlShorts(new GetAllUrlShortsQuery());
@@ -37,8 +30,7 @@ namespace TestApp.MVC.Controllers
         }
 
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(AddUrlShortCommand))]
+        [HttpGet]        
         public async Task<IActionResult> Add()
         {
             var users = await _userService.GetAllUser(new GetAllUsersQuery());
@@ -48,8 +40,7 @@ namespace TestApp.MVC.Controllers
         }
 
        
-        [HttpPost]
-        [CommandPermission(Command = typeof(AddUrlShortCommand))]
+        [HttpPost]        
         public async Task<IActionResult> Add([FromForm] AddUrlShortCommand req)
         {
 
@@ -67,8 +58,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [HttpGet]
-        [CommandPermission(Command = typeof(UpdateUrlShortCommand))]
+        [HttpGet]       
         public async Task<IActionResult> Update(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
@@ -80,8 +70,7 @@ namespace TestApp.MVC.Controllers
         }
 
         
-        [HttpPost]
-        [CommandPermission(Command = typeof(UpdateUrlShortCommand))]
+        [HttpPost]        
         public async Task<IActionResult> Update([FromRoute] int Id,
                                                 [FromForm] UpdateUrlShortCommand req)
         {
@@ -99,7 +88,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [CommandPermission(Command = typeof(DeleteUrlShortCommand))]
+       
         public async Task<IActionResult> Delete([FromRoute] int Id,
                                                  [FromQuery] DeleteUrlShortCommand req)
         {
@@ -117,7 +106,7 @@ namespace TestApp.MVC.Controllers
             }
         }
 
-        [CommandPermission(Command = typeof(GetUrlShortByIdQuery))]
+       
         public async Task<IActionResult> Detail(int? id)
         {
             if (!id.HasValue || id.Value <= 0)

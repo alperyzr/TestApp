@@ -7,7 +7,7 @@ namespace TestApp.MVC.Extentions;
 
 public static class HttpClientExtensions
 {
-	public static async Task<T?> CustomPostAsync<T>(this HttpClient client, string url, object request)
+	public static async Task<T> CustomPostAsync<T>(this HttpClient client, string url, object request)
 	{
 		var httpRequest = new HttpRequestMessage
 		{
@@ -16,14 +16,13 @@ public static class HttpClientExtensions
 			Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json")
 		};
 
-		var response = await client.SendAsync(httpRequest);
+        var response = await client.SendAsync(httpRequest);
+        var stringContent = await response.Content.ReadAsStringAsync();
 
-		var stringContent = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<T>(stringContent);
+    }
 
-		return JsonConvert.DeserializeObject<T>(stringContent);
-	}
-
-	public static async Task<T?> CustomGetAsync<T>(this HttpClient client, string url, object request)
+	public static async Task<T> CustomGetAsync<T>(this HttpClient client, string url, object request)
 	{
 		var httpRequest = new HttpRequestMessage
 		{
@@ -39,7 +38,7 @@ public static class HttpClientExtensions
 		return JsonConvert.DeserializeObject<T>(stringContent);
 	}
 
-	public static async Task<T?> CustomPutAsync<T>(this HttpClient client, string url, object request)
+	public static async Task<T> CustomPutAsync<T>(this HttpClient client, string url, object request)
 	{
 		var httpRequest = new HttpRequestMessage
 		{
@@ -55,7 +54,7 @@ public static class HttpClientExtensions
 		return JsonConvert.DeserializeObject<T>(stringContent);
 	}
 
-	public static async Task<T?> CustomDeleteAsync<T>(this HttpClient client, string url, object request)
+	public static async Task<T> CustomDeleteAsync<T>(this HttpClient client, string url, object request)
 	{
 		var httpRequest = new HttpRequestMessage
 		{

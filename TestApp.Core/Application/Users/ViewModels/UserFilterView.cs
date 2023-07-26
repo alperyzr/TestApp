@@ -8,8 +8,9 @@ namespace TestApp.Core.Application.Users.ViewModels
 {
 	public class UserFilterView
 	{
-        public int? UserId { get; set; }
-        public string UserName { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public int? Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        
     }
 }
