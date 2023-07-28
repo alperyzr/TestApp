@@ -24,8 +24,13 @@ namespace TestApp.Core.Application.Users.ViewModels
         public string Password { get; set; } 
       
         public DateTime? BirthDate { get; set; } 
-        public string ImagePath { get; set; } 
-        
+
+        public string ImagePath { get; set; }
+
+        public string? ResreshToken { get; set; }
+
+        public DateTime? RefreshTokenEndDate { get; set; }
+
 
     }
 }

@@ -1,39 +1,44 @@
 ﻿using Bentas.O2.DynamicLinq;
+using Kendo.Mvc.Infrastructure;
+using Kendo.Mvc;
 using Kendo.Mvc.UI;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.Users.Commands;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Filters;
+using TestApp.MVC.Services;
 using TestApp.MVC.Services.Interfaces;
-
+using Kendo.Mvc.Extensions;
+using TestApp.Repository;
+using System.Collections;
 
 namespace TestApp.MVC.Controllers
 {
-    //[Authorize("Admin")]
+
     public class UserController : Controller
     {
         private readonly IUserService _userService;
         private readonly Bentas.O2.Core.Interfaces.IJsonHelper _jsonHelper;
+        private readonly AppDbContext _appDbContext;
 
-        public UserController(IUserService userService, Bentas.O2.Core.Interfaces.IJsonHelper jsonHelper)
+        public UserController(IUserService userService, Bentas.O2.Core.Interfaces.IJsonHelper jsonHelper, AppDbContext appDbContext)
         {
             _userService = userService;
             _jsonHelper = jsonHelper;
+            _appDbContext = appDbContext;
         }
 
-        //[Route("User/Index")]
-        //[CommandPermission(Command = typeof(ListDsUserQuery))]
-        //public async Task<IActionResult> Index()
-        //{
-        //    var model = await _userService.GetAllUser(new GetAllUsersQuery());
-        //    return View(model.Payload);
-        //}
+        
 
-        [HttpGet("User/Index")]              
+        [HttpGet("User/Index")]
         public IActionResult Index()
         {
-            return View(new UserFilterView());
+            return View();
         }
 
         [HttpPost]
@@ -47,14 +52,15 @@ namespace TestApp.MVC.Controllers
             return Json(response);
         }
 
-        [HttpGet]      
+
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
             return View(new UserView());
         }
 
         [ValidationFilter]
-        [HttpPost]       
+        [HttpPost]
         public async Task<IActionResult> Add([FromForm] AddUserCommand req)
         {
 
@@ -72,7 +78,7 @@ namespace TestApp.MVC.Controllers
 
         }
 
-        [HttpGet]       
+        [HttpGet]
         public async Task<IActionResult> Update(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
@@ -84,7 +90,7 @@ namespace TestApp.MVC.Controllers
         }
 
         [ValidationFilter]
-        [HttpPost]       
+        [HttpPost]
         public async Task<IActionResult> Update([FromRoute] int Id,
                                                 [FromForm] UpdateUserCommand req)
         {
@@ -101,7 +107,7 @@ namespace TestApp.MVC.Controllers
             }
 
         }
-       
+
         public async Task<IActionResult> Delete([FromRoute] int Id,
                                                  [FromQuery] DeleteUserCommand req)
         {
@@ -120,7 +126,7 @@ namespace TestApp.MVC.Controllers
             }
         }
 
-        
+
         public async Task<IActionResult> Detail(int? id)
         {
             if (!id.HasValue || id.Value <= 0)
@@ -138,6 +144,6 @@ namespace TestApp.MVC.Controllers
             }
 
         }
-
     }
+
 }

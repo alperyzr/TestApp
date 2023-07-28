@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TestApp.Core.Application.Login.Queries;
+using TestApp.Core.Entities;
 using TestApp.MVC.Filters;
 using TestApp.MVC.Services.Interfaces;
 
@@ -38,8 +39,8 @@ namespace TestApp.MVC.Controllers
                 if (model.Payload.Token != null)
                 {
                     SetCookie("Token", model.Payload.Token, 10);
-                    HttpContext.Session.SetString("Token", model.Payload.Token);
-                    SetCookie("UserKey", model.Payload.UserName, 10);
+                    //HttpContext.Session.SetString("Token", model.Payload.Token);
+                    SetCookie("UserKey", model.Payload.UserName, 10);                   
                     return RedirectToAction("Index", "Home");
 
                 }
@@ -82,6 +83,7 @@ namespace TestApp.MVC.Controllers
             Response.Cookies.Append(key, value, option);
         }
 
+        
         public void RemoveCookie(string key)
         {
             Response.Cookies.Delete(key);

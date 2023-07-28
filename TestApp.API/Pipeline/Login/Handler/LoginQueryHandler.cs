@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FirebaseAdmin.Auth.Multitenancy;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TestApp.API.Services.Interfaces;
 using TestApp.Core.Application;
@@ -39,7 +40,8 @@ namespace TestApp.API.Pipeline.Login.Handler
 			
             AccessToken accessToken = _tokenService.CreateAccessToken(_mapper.Map<User>(model));
             accessToken.UserName = model.FirstName + " " + model.LastName;
-            accessToken.ImagePath = model.ImagePath;
+            accessToken.UserRoles = _context.UserRoles.Include(x=>x.Role).Where(x=>x.UserId == model.Id).ToList();
+			accessToken.User = model;
 
             model.RefreshToken = accessToken.RefreshToken;
 			model.RefreshTokenEndDate = accessToken.Expiration;

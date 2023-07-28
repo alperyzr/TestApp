@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bentas.O2.Core.Interfaces;
+using Bentas.O2.DynamicLinq;
+using Kendo.Mvc.UI;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.Queries;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
+using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Services.Interfaces;
 
 namespace TestApp.MVC.Controllers
@@ -14,21 +19,35 @@ namespace TestApp.MVC.Controllers
         private readonly IUserRoleService _userRoleService;
         private readonly IRoleService _roleService;
         private readonly IUserService _userService;
+        private readonly IJsonHelper _jsonHelper;
 
         public UserRoleController(IUserRoleService userRoleService,
             IRoleService roleService,
-            IUserService userService)
+            IUserService userService,
+            IJsonHelper jsonHelper)
         {
             _userRoleService = userRoleService;
             _roleService = roleService;
             _userService = userService;
+            _jsonHelper = jsonHelper;
         }
 
-        [HttpGet("UserRole/Index")]                
-        public async Task<IActionResult> Index()
+
+        [HttpGet("UserRole/Index")]
+        public IActionResult Index()
         {
-            var model = await _userRoleService.GetAllUserRoles(new GetAllUserRolesQuery());
-            return View(model.Payload);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UserRoleFilterView filterView)
+        {
+            var filter = _jsonHelper.Deserialize<ListDsUserRoleQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+            filter.FilterView = filterView;
+
+            var response = await _userRoleService.ListDsUserRoleQuery(filter);
+
+            return Json(response);
         }
 
 

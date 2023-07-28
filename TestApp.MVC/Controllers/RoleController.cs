@@ -4,9 +4,11 @@ using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.ViewModels;
 using TestApp.MVC.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TestApp.MVC.Controllers
 {
+    
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;
@@ -16,6 +18,7 @@ namespace TestApp.MVC.Controllers
             _roleService = roleService;
         }
 
+        
         [HttpGet("Role/Index")]                
         public async Task<IActionResult> Index()
         {

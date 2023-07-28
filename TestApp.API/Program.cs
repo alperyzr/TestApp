@@ -36,6 +36,7 @@ builder.Services.AddAuthentication(auth =>
 {
     auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
 }).AddJwtBearer(jwtbeareroptions =>
 {
     //  jwtbeareroptions.SaveToken = true;
@@ -48,8 +49,9 @@ builder.Services.AddAuthentication(auth =>
         ValidIssuer = tokenOptions.Issuer,
         ValidAudience = tokenOptions.Audience,
         IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecurityKey),
-        ClockSkew = TimeSpan.Zero
+        ClockSkew = TimeSpan.Zero,        
     };
+    
 });
 
 builder.Services.AddControllers();

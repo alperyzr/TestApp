@@ -40,6 +40,7 @@ $(function () {
 
 //Silme İşlemi
 function AreYouSureDelete(id, ajaxPath) {
+    debugger;
     Swal.fire({
         title: 'Silmek İstediğinizden Eminmisiniz?',       
         icon: 'warning',
@@ -69,3 +70,37 @@ function AreYouSureDelete(id, ajaxPath) {
     })
 }
 
+
+
+function onDetailClick(e) {
+    debugger;
+    e.preventDefault();
+    var grid = $("#Grid").data("kendoGrid");
+    var dataItem = grid.dataItem($(e.target).closest("tr"));
+    var itemId = dataItem.Id;
+    alert(itemId);
+
+};
+
+function onEditClick(e) {
+    debugger;
+    e.preventDefault();
+    var grid = $("#Grid").data("kendoGrid");
+    var dataItem = grid.dataItem($(e.target).closest("tr"));
+    var itemId = dataItem.Id;
+    alert(itemId);
+
+};
+
+function onDeleteClick(e) {
+    debugger;
+    e.preventDefault();
+    if (confirm("Bu öğeyi silmek istediğinizden emin misiniz?")) {
+        var grid = $("#Grid").data("kendoGrid");
+        var dataItem = grid.dataItem($(e.target).closest("tr"));
+        var itemId = dataItem.Id;
+        alert(itemId);
+
+        
+    }
+}

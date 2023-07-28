@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bentas.O2.DynamicLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,8 @@ namespace TestApp.Service.Mapping
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<UserRole, UserRoleDto>().ReverseMap();
             CreateMap<UrlShort, UrlShortDto>().ReverseMap();            
-            CreateMap<UserRoleDto, DropDownView>().ReverseMap();            
-                        
+            CreateMap<UserRoleDto, DropDownView>().ReverseMap();                                      
+            CreateMap<ListDsUserView, User>().ReverseMap();                                      
             
         }
     }

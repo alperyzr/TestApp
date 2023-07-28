@@ -4,7 +4,7 @@ using TestApp.Core.Application.UrlShorts.Queries;
 using TestApp.Core.Application.UrlShorts.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace TestApp.MVC.Controllers
 {
@@ -22,6 +22,7 @@ namespace TestApp.MVC.Controllers
             _userService = userService;            
         }
 
+        
         [HttpGet("UrlShort/Index")]                
         public async Task<IActionResult> Index()
         {

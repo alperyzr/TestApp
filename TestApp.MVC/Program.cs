@@ -3,18 +3,30 @@ using Bentas.O2.Core.Interfaces;
 using Bentas.O2.TagHelpers;
 using Bentas.O2.WebExtensions.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using TestApp.MVC.Services;
 using TestApp.MVC.Services.Interfaces;
+using TestApp.Repository;
 using TestApp.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddKendo();
+
 builder.Services.AddSession();
-builder.Services.AddControllersWithViews();
+
+//Kendo için Json Formatýnýn AddNewtonJson olduðu belirtilir
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
+builder.Services.AddKendo();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    //appsettingsten okuyacaðý kýsým
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
+});
 
 //Default Validation mesajlarýný engellemke için Kullanýlýr
 builder.Services.Configure<ApiBehaviorOptions>(options =>

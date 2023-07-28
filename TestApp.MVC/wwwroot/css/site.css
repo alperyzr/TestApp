@@ -297,7 +297,7 @@ td.actions a {
     }
 
     td.actions a.delete {
-        cursor:pointer;
+        cursor: pointer;
         color: #f00;
     }
 
@@ -340,17 +340,46 @@ td.actions a {
 .float-right {
     float: right;
 }
+
 .detail-title {
     color: #776BCC;
 }
+
 .card {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.card .card-header{
-    padding-top:13px !important;
-    padding-bottom:13px !important;
-}
+
+    .card .card-header {
+        padding-top: 13px !important;
+        padding-bottom: 13px !important;
+    }
+
 .error-validation-message {
     display: block;
     color: #f35353;
+}
+
+
+
+
+a.detail {
+    cursor: pointer !important;
+    color: #333 !important;
+    text-decoration: none !important;
+}
+
+a.delete {
+    cursor: pointer !important;
+    color: #f00 !important;
+    text-decoration: none !important;
+}
+
+a.edit {
+    cursor: pointer !important;
+    color: #488ccc !important;
+    text-decoration: none !important;
+}
+
+a i {
+    font-size: 1.1rem;
 }
