@@ -70,7 +70,20 @@ function AreYouSureDelete(id, ajaxPath) {
     })
 }
 
-
+function error_handler(e) {
+    debugger;
+    if (e.errors) {
+        var message = "Errors:\n";
+        $.each(e.errors, function (key, value) {
+            if ('errors' in value) {
+                $.each(value.errors, function () {
+                    message += this + "\n";
+                });
+            }
+        });
+        alert(message);
+    }
+}
 
 function onDetailClick(e) {
     debugger;
@@ -78,7 +91,7 @@ function onDetailClick(e) {
     var grid = $("#Grid").data("kendoGrid");
     var dataItem = grid.dataItem($(e.target).closest("tr"));
     var itemId = dataItem.Id;
-    alert(itemId);
+    window.location.href = "Detail/" + itemId;
 
 };
 
@@ -88,19 +101,16 @@ function onEditClick(e) {
     var grid = $("#Grid").data("kendoGrid");
     var dataItem = grid.dataItem($(e.target).closest("tr"));
     var itemId = dataItem.Id;
-    alert(itemId);
+    window.location.href = "Update/" + itemId;
 
 };
 
 function onDeleteClick(e) {
     debugger;
     e.preventDefault();
-    if (confirm("Bu öğeyi silmek istediğinizden emin misiniz?")) {
-        var grid = $("#Grid").data("kendoGrid");
-        var dataItem = grid.dataItem($(e.target).closest("tr"));
-        var itemId = dataItem.Id;
-        alert(itemId);
+    var grid = $("#Grid").data("kendoGrid");
+    var dataItem = grid.dataItem($(e.target).closest("tr"));
+    var itemId = dataItem.Id;
+    AreYouSureDelete(itemId, "Delete")
 
-        
-    }
 }

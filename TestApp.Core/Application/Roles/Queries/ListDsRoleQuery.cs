@@ -11,5 +11,6 @@ namespace TestApp.Core.Application.Roles.Queries
 {
     public class ListDsRoleQuery : BDataSourceRequest, IRequest<BDataSourceResult<ListDsRoleView>>
     {
+        public RoleFilterView FilterView { get; set; } = new RoleFilterView();
     }
 }

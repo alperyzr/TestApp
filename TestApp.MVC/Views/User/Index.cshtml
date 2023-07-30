@@ -1,8 +1,12 @@
-﻿<div class="row">
+﻿<div class="row mb-3">
     <div class="col-12">
-        <div class="col-6"></div>
-        <div class="col-6">
-            <a href="@Url.Action("Add","User")" class="add-button">Kullanıcı Ekle</a>
+        <div class="row">
+            <div class="col-6">
+                <span>Kullanıcı Listesi</span>
+            </div>
+            <div class="col-6 text-align-right">
+                <a href="@Url.Action("Add","User")" class="add-button">Kullanıcı Ekle</a>
+            </div>
         </div>
     </div>
 </div>
@@ -12,29 +16,29 @@
             <read url="@Url.Action("ListDs", "User")" />
             <update url="@Url.Action("Update", "User")" />
             <create url="@Url.Action("Add", "User")" />
-            <destroy url="@Url.Action("Delete", "User")" />           
+            <destroy url="@Url.Action("Delete", "User")" />
         </transport>
     </datasource>
     <columns>
         <column field="Id">
             <groupable enabled="false" />
         </column>
-        <column field="FirstName" />
-        <column field="LastName" />
-        <column field="Email" />
-        <column width="40">
-            <commands>
-                <column-command click="onDetailClick" template='<a class="detail"><i class=" k-icon k-i-align-center"></i></a> '></column-command>
+        <column field="UserName" title="Kullanıcı Adı" />
+        <column field="Email" title="Email" />
+        <column field="BirthDate" title="Doğum Tarihi" />
+        <column width="100">
+            <commands>               
+                <column-command text="Detay" name="details" click="onDetailClick"></column-command>              
             </commands>
         </column>
-        <column width="40">
-            <commands>
-                <column-command click="onEditClick" template='<a class="edit"><i class="k-icon k-i-pencil"></i></a>'></column-command>
+        <column width="100">
+            <commands>              
+                <column-command text="Güncelle" name="edt" click="onEditClick"></column-command>                
             </commands>
         </column>
-        <column width="40">
-            <commands>
-                <column-command click="onDeleteClick" template='<a class="delete"><i class="k-icon k-i-trash"></i></a>'></column-command>
+        <column width="100">
+            <commands>              
+                <column-command text="Sil" name="delete" click="onDeleteClick"></column-command>
             </commands>
         </column>
     </columns>

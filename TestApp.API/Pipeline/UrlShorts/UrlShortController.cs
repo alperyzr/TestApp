@@ -30,7 +30,7 @@ namespace TestApp.API.Pipeline.UrlShorts
 
         [HttpPost]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUrlShortView>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> ListDsUrlShort([FromBody] ListDsUrlShortQuery req)
+        public async Task<IActionResult> ListDs([FromBody] ListDsUrlShortQuery req)
         {
             var model = await _mediator.Send(req);
             return Ok(model);

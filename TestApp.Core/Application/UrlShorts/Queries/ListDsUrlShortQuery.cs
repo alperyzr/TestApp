@@ -11,5 +11,6 @@ namespace TestApp.Core.Application.UrlShorts.Queries
 {
     public class ListDsUrlShortQuery : BDataSourceRequest, IRequest<BDataSourceResult<ListDsUrlShortView>>
     {
+        public UrlShortFilterView FilterView { get; set; } = new UrlShortFilterView();
     }
 }

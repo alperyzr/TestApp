@@ -39,7 +39,24 @@ namespace TestApp.API.Pipeline.Users.Handlers
             if (request.Sort == null || !request.Sort.Any())
                 retVal = retVal.OrderByDescending(e => e.Id);
 
-            var result = await retVal.BToDataSourceResultAsync(request);
+            var result = await retVal.Select(x=> new ListDsUserView
+            {
+                IsDeleted = x.IsDeleted,
+                IsActive = x.IsActive,
+                Id = x.Id,
+                FirstName = x.FirstName,
+                BirthDate = x.BirthDate,
+                CreatedDate = x.CreatedDate,
+                Email = x.Email,
+                ImagePath = x.ImagePath,
+                LastName = x.LastName,
+                Password = x.Password,
+                RefreshTokenEndDate = x.RefreshTokenEndDate,
+                ResreshToken = x.ResreshToken,
+                UpdatedDate = x.UpdatedDate,
+                UserName = x.FirstName + " " + x.LastName,
+                
+            }).BToDataSourceResultAsync(request);
 
             return result;
 

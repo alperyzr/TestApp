@@ -27,9 +27,9 @@ namespace TestApp.API.Pipeline.UserRoleRoles
             return Ok(model);
         }
 
-        [HttpPost("listDs")]
+        [HttpPost()]
         [ProducesResponseType(typeof(BDataSourceResult<ListDsUserRoleView>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> ListDsUserRole([FromBody] ListDsUserRoleQuery req)
+        public async Task<IActionResult> ListDs([FromBody] ListDsUserRoleQuery req)
         {
             var model = await _mediator.Send(req);
             return Ok(model);

@@ -5,6 +5,12 @@ using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.ViewModels;
 using TestApp.MVC.Filters;
 using Microsoft.AspNetCore.Authorization;
+using Kendo.Mvc.UI;
+using TestApp.Core.Application.Users.Queries;
+using TestApp.Core.Application.Users.ViewModels;
+using TestApp.MVC.Services;
+using Bentas.O2.Core.Interfaces;
+using Bentas.O2.DynamicLinq;
 
 namespace TestApp.MVC.Controllers
 {
@@ -12,18 +18,30 @@ namespace TestApp.MVC.Controllers
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;
+        private readonly IJsonHelper _jsonHelper;
 
-        public RoleController(IRoleService roleService)
+        public RoleController(IRoleService roleService, IJsonHelper jsonHelper)
         {
             _roleService = roleService;
+            _jsonHelper = jsonHelper;
         }
 
-        
-        [HttpGet("Role/Index")]                
-        public async Task<IActionResult> Index()
+
+        [HttpGet("Role/Index")]
+        public IActionResult Index()
         {
-            var model = await _roleService.GetAllRole(new GetAllRolesQuery());
-            return View(model.Payload);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, RoleFilterView filterView)
+        {
+            var filter = _jsonHelper.Deserialize<ListDsRoleQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+            filter.FilterView = filterView;
+
+            var response = await _roleService.ListDsRoleQuery(filter);
+
+            return Json(response);
         }
 
 

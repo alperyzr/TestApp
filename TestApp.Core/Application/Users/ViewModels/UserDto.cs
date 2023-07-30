@@ -30,6 +30,7 @@ namespace TestApp.Core.Application.Users.ViewModels
         public string? ResreshToken { get; set; }
 
         public DateTime? RefreshTokenEndDate { get; set; }
+        public string UserName { get; set; }
 
 
     }

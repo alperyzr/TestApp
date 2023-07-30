@@ -25,6 +25,9 @@ namespace TestApp.Service.Mapping
             CreateMap<UrlShort, UrlShortDto>().ReverseMap();            
             CreateMap<UserRoleDto, DropDownView>().ReverseMap();                                      
             CreateMap<ListDsUserView, User>().ReverseMap();                                      
+            CreateMap<ListDsUserRoleView, UserRole>().ReverseMap();                                      
+            CreateMap<ListDsRoleView, Role>().ReverseMap();                                      
+            CreateMap<ListDsUrlShortView, UrlShort>().ReverseMap();                                      
             
         }
     }

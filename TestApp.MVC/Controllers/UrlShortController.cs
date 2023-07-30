@@ -5,6 +5,11 @@ using TestApp.Core.Application.UrlShorts.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
 using Microsoft.AspNetCore.Authorization;
+using Kendo.Mvc.UI;
+using TestApp.Core.Application.Users.ViewModels;
+using Bentas.O2.Core.Interfaces;
+using TestApp.Core.Application.UrlShorts.ViewModels;
+using Bentas.O2.DynamicLinq;
 
 namespace TestApp.MVC.Controllers
 {
@@ -13,21 +18,34 @@ namespace TestApp.MVC.Controllers
     {
         private readonly IUrlShortService _urlShortService;
         private readonly IUserService _userService;
-        
+        private readonly IJsonHelper _jsonHelper;
+
 
         public UrlShortController(IUrlShortService urlShortService,
-            IUserService userService)
+            IUserService userService,
+            IJsonHelper jsonHelper)
         {
             _urlShortService = urlShortService;
-            _userService = userService;            
+            _userService = userService;
+            _jsonHelper = jsonHelper;
         }
 
-        
-        [HttpGet("UrlShort/Index")]                
-        public async Task<IActionResult> Index()
+
+        [HttpGet("UrlShort/Index")]
+        public IActionResult Index()
         {
-            var model = await _urlShortService.GetAllUrlShorts(new GetAllUrlShortsQuery());
-            return View(model.Payload);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UrlShortFilterView filterView)
+        {
+            var filter = _jsonHelper.Deserialize<ListDsUrlShortQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+            filter.FilterView = filterView;
+
+            var response = await _urlShortService.ListDsUrlShortQuery(filter);
+
+            return Json(response);
         }
 
 

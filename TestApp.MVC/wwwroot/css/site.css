@@ -361,25 +361,24 @@ td.actions a {
 
 
 
-
-a.detail {
-    cursor: pointer !important;
-    color: #333 !important;
-    text-decoration: none !important;
-}
-
-a.delete {
-    cursor: pointer !important;
-    color: #f00 !important;
-    text-decoration: none !important;
-}
-
-a.edit {
-    cursor: pointer !important;
-    color: #488ccc !important;
-    text-decoration: none !important;
-}
-
-a i {
+i {
     font-size: 1.1rem;
 }
+
+    i.detail {
+        cursor: pointer !important;
+        color: #333 !important;
+        text-decoration: none !important;
+    }
+
+    i.delete {
+        cursor: pointer !important;
+        color: #f00 !important;
+        text-decoration: none !important;
+    }
+
+    i.edit {
+        cursor: pointer !important;
+        color: #488ccc !important;
+        text-decoration: none !important;
+    }

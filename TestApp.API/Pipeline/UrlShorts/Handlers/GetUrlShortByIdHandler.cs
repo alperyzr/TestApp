@@ -29,7 +29,7 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
             var model = await _comtext.UrlShorts.Include(x => x.User).Select(x=> new GetUrlShortByIdDto
             {
                 Id = x.Id,
-                ShortUtl = x.ShortUrl,
+                ShortUrl = x.ShortUrl,
                 Url = x.Url,
                 UserId = x.UserId,
                 UserName = x.User.FirstName + " " + x.User.LastName,

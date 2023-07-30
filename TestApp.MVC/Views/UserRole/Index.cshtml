@@ -1,47 +1,47 @@
-﻿@using TestApp.Core.Application.UserRoles.ViewModels;
-@model List<UserRoleDto>
-
-    <div class="card">
-        <div class="card-header p-2">
-            <div class="row">
-                <div class="col-8">
-                    Kullanıcı Rolleri Listesi
-                </div>
-                <div class="col-4 text-align-right">
-                <a href="/UserRole/Add" class="add-button"><i class="fa-solid fa-plus mr-1"></i>Kullanıcı Rolü Ekle</a>
-                </div>
-            </div>        
-        </div>
-        <div class="card-body p-2">
-        <table class="table table-hover mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Kullanıcı</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">İşlemler</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <th scope="row">@item.Id</th>
-                        <td>@item.UserName</td>
-                        <td>@item.RoleName</td>                       
-                        <td class="actions">
-                            <a href="/UserRole/Detail/@item.Id" class="detail"><i class="k-icon k-i-align-center"></i></a>
-                            @*<a href="/UserRole/Update/@item.Id" class="edit"><i class="k-icon k-i-pencil"></i></a>*@
-                            <a onclick='AreYouSureDelete(@item.Id,"/UserRole/Delete")' class="delete"><i class="k-icon k-i-trash"></i></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+﻿<div class="row mb-3">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6">
+                <span>Kullanıcı Rolleri Listesi</span>
+            </div>
+            <div class="col-6 text-align-right">
+                <a href="@Url.Action("Add","UserRole")" class="add-button">Kullanıcı Rolü Ekle</a>
+            </div>
         </div>
     </div>
+</div>
+<kendo-grid name="Grid">
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="15">
+        <transport>
+            <read url="@Url.Action("ListDs", "UserRole")" />
+            <update url="@Url.Action("Update", "UserRole")" />
+            <create url="@Url.Action("Add", "UserRole")" />
+            <destroy url="@Url.Action("Delete", "UserRole")" />
+        </transport>
+    </datasource>
+    <columns>
+        <column field="Id">
+            <groupable enabled="false" />
+        </column>
+        <column field="UserName" title="Kullanıcı Adı" />
+        <column field="RoleName" title="Rol Adı" />
+        
+        <column width="100">
+            <commands>
+                <column-command text="Detay" name="details" click="onDetailClick"></column-command>
+            </commands>
+        </column>
+        
+        <column width="100">
+            <commands>
+                <column-command text="Sil" name="delete" click="onDeleteClick"></column-command>
+            </commands>
+        </column>
+    </columns>
 
-
-
-
+    <pageable enabled="true" />
+    <sortable enabled="true" />
+    <filterable enabled="true" />
+    <scrollable enabled="true" />
+    <groupable enabled="true" />
+</kendo-grid>

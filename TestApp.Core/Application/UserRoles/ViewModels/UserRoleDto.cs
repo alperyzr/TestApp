@@ -14,8 +14,16 @@ namespace TestApp.Core.Application.UserRoles.ViewModels
         public int? UserId { get; set; }
         public int? RoleId { get; set; }    
         public string UserName { get; set; }
+
+        [Display(Name = "Rol Adı")]
         public string RoleName { get; set; }       
         public string[] SelectedRoles { get; set; }
+
+        [Display(Name = "Kullanıcı Adı")]
+        public string UserFirstName { get; set; }
+
+        [Display(Name = "Kullanıcı Soyadı")]
+        public string UserLastName { get; set; }
 
     }
 }
