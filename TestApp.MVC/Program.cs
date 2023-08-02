@@ -19,8 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSession();
 
 //Kendo için Json Formatýnýn AddNewtonJson olduðu belirtilir
-builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
+//AddRazorRuntimeCompilation() html tarafýnda bir deðiþiklikte F5 ile direkt renderlanmasýný ve ekranda gösterilmesini saðlar
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
 builder.Services.AddKendo();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

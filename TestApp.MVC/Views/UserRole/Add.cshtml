@@ -26,7 +26,7 @@
                                         <option value="@item.Key">@item.Value</option>
                                     }
                                 </select>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -37,12 +37,26 @@
                             </div>
                             <div class="col-12">
                                 <select asp-for="SelectedRoles" class="selectpicker" multiple data-live-search="true">
-                                    @foreach (var item in ViewBag.Roles)
-                                    {
-                                        <option value="@item.Key">@item.Value</option>
-                                    }
+                                @foreach (var item in ViewBag.Roles)
+                                {
+                                <option value="@item.Key">@item.Value</option>
+                                }
                                 </select>
-                               @* <span asp-validation-for="RoleId" class="error-validation-message"></span>*@
+                                @* <span asp-validation-for="RoleId" class="error-validation-message"></span>*@
+
+                               @* <kendo-multiselect name="multiselect"
+                                                   datatextfield="Text"
+                                                   datavaluefield="Value"
+                                                   down-arrow="true"
+                                                   no-data-template-id="noDataTemplate"
+                                                   placeholder="Rol Seçiniz"
+                                                   filter="FilterType.Contains">
+                                    <datasource type="DataSourceTagHelperType.Custom">
+                                        <transport>
+                                            <read url="@Url.Action("GetRoles", "UserRole")" />
+                                        </transport>
+                                    </datasource>
+                                </kendo-multiselect>*@
                             </div>
                         </div>
                     </div>

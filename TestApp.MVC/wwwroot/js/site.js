@@ -85,8 +85,7 @@ function error_handler(e) {
     }
 }
 
-function onDetailClick(e) {
-    debugger;
+function onDetailClick(e) {  
     e.preventDefault();
     var grid = $("#Grid").data("kendoGrid");
     var dataItem = grid.dataItem($(e.target).closest("tr"));
@@ -95,8 +94,7 @@ function onDetailClick(e) {
 
 };
 
-function onEditClick(e) {
-    debugger;
+function onEditClick(e) {   
     e.preventDefault();
     var grid = $("#Grid").data("kendoGrid");
     var dataItem = grid.dataItem($(e.target).closest("tr"));
@@ -105,12 +103,30 @@ function onEditClick(e) {
 
 };
 
-function onDeleteClick(e) {
-    debugger;
+function onDeleteClick(e) {   
     e.preventDefault();
     var grid = $("#Grid").data("kendoGrid");
     var dataItem = grid.dataItem($(e.target).closest("tr"));
     var itemId = dataItem.Id;
     AreYouSureDelete(itemId, "Delete")
 
+};
+
+function detailtemplate(data) {
+    debugger;
+    var template = '<a role="button" class="k-button k-button-icontext k-grid-detail detail"><span class="k-icon k-i-table-align-top-left"></span></a>';
+    return template;
+};
+
+function edittemplate(data) {
+    debugger;
+    //var template = '<a role="button" class="k-button k-button-icontext k-grid-edit edit"><i class="k-icon k-i-edit"></i></a>';
+    var template = '<a role="button" class="k-button k-button-icontext k-grid-edit edit"><span class="k-icon k-i-edit"></span></a>';
+    return template;
+};
+
+function deletetemplate(data) {
+    debugger;
+    var template = '<a role="button" class="k-button k-button-icontext k-grid-delete delete"><span class="k-icon k-i-close"></span></a>'
+    return template;
 }

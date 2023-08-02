@@ -85,6 +85,20 @@ namespace TestApp.MVC.Controllers
 
         }
 
+        public async Task GetRoles()
+        {
+            var roles = await _roleService.GetAllRole(new GetAllRolesQuery());
+            List<KeyValuePair<int, string>> roleModels = roles.Payload.Select(u => new KeyValuePair<int, string>(u.Id, u.Name)).ToList();
+            ViewBag.Roles = roleModels;
+        }
+
+        public async Task GetUsers()
+        {
+            var users = await _userService.GetAllUser(new GetAllUsersQuery());
+            List<KeyValuePair<int, string>> userModels = users.Payload.Select(u => new KeyValuePair<int, string>(u.Id, u.FirstName + " " + u.LastName)).ToList();
+            ViewBag.Users = userModels;
+        }
+
         [HttpGet]        
         public async Task<IActionResult> Update(int? id)
         {

@@ -17,19 +17,22 @@ namespace TestApp.API.Pipeline.UrlShorts.Handlers
     {
         private readonly AppDbContext _comtext;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public GetUrlShortByIdHandler(AppDbContext comtext, IMapper mapper)
+        public GetUrlShortByIdHandler(AppDbContext comtext, IMapper mapper, IConfiguration configuration)
         {
             _comtext = comtext;
             _mapper = mapper;
+            _configuration = configuration;
         }
-      
+
         public async Task<ServiceResult<GetUrlShortByIdDto>> Handle(GetUrlShortByIdQuery request, CancellationToken cancellationToken)
         {
+            var path = _configuration.GetValue<string>("ClientUrl");
             var model = await _comtext.UrlShorts.Include(x => x.User).Select(x=> new GetUrlShortByIdDto
             {
                 Id = x.Id,
-                ShortUrl = x.ShortUrl,
+                ShortUrl = $"{path}{x.ShortUrl}",
                 Url = x.Url,
                 UserId = x.UserId,
                 UserName = x.User.FirstName + " " + x.User.LastName,
