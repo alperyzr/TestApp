@@ -12,7 +12,9 @@ using TestApp.Service.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Program.cs çalýþtýðý zaman çalýþan tüm assemblyleri temsil etmek için typeof(program) kullanýlýr
 builder.Services.AddMediatR(typeof(Program));
+
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
