@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 
 using TestApp.Core.Application;
@@ -14,7 +14,7 @@ namespace TestApp.MVC.Services.Interfaces
         Task<ServiceResult<Unit>> DeleteRole(int Id, DeleteRoleCommand req);
         Task<ServiceResult<RoleDto>> UpdateRole(int Id, UpdateRoleCommand req);
         Task<ServiceResult<RoleDto>> GetRoleById(GetRoleByIdQuery req);
-        Task<BDataSourceResult<ListDsRoleView>> ListDsRoleQuery(ListDsRoleQuery req);
+        Task<ListDsRoleView> ListDsRoleQuery(ListDsRoleQuery req);
         Task<ServiceResult<List<RoleDto>>> GetAllRole(GetAllRolesQuery req);
     }
 }

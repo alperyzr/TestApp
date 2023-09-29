@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.MVC.Services.Interfaces;
@@ -46,9 +46,9 @@ namespace TestApp.MVC.Services
             return model;
         }
 
-        public async Task<BDataSourceResult<ListDsUrlShortView>> ListDsUrlShortQuery(ListDsUrlShortQuery req)
+        public async Task<ListDsUrlShortView> ListDsUrlShortQuery(ListDsUrlShortQuery req)
         {
-            var model = await _httpClient.CustomPostAsync<BDataSourceResult<ListDsUrlShortView>>($"{ApiUrl}/{ApiClient.ListDsUrlShort}", req);
+            var model = await _httpClient.CustomPostAsync<ListDsUrlShortView>($"{ApiUrl}/{ApiClient.ListDsUrlShort}", req);
             return model;
         }
 

@@ -5,12 +5,10 @@ using TestApp.Core.Application.Roles.Commands;
 using TestApp.Core.Application.Roles.ViewModels;
 using TestApp.MVC.Filters;
 using Microsoft.AspNetCore.Authorization;
-using Kendo.Mvc.UI;
 using TestApp.Core.Application.Users.Queries;
 using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Services;
-using Bentas.O2.Core.Interfaces;
-using Bentas.O2.DynamicLinq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TestApp.MVC.Controllers
 {
@@ -33,16 +31,16 @@ namespace TestApp.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, RoleFilterView filterView)
-        {
-            var filter = _jsonHelper.Deserialize<ListDsRoleQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
-            filter.FilterView = filterView;
+        //[HttpPost]
+        //public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, RoleFilterView filterView)
+        //{
+        //    var filter = _jsonHelper.Deserialize<ListDsRoleQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+        //    filter.FilterView = filterView;
 
-            var response = await _roleService.ListDsRoleQuery(filter);
+        //    var response = await _roleService.ListDsRoleQuery(filter);
 
-            return Json(response);
-        }
+        //    return Json(response);
+        //}
 
 
         [HttpGet]       

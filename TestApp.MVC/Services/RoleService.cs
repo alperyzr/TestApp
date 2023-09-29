@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.Roles.Commands;
@@ -44,9 +44,9 @@ namespace TestApp.MVC.Services
             return model;
         }
 
-        public async Task<BDataSourceResult<ListDsRoleView>> ListDsRoleQuery(ListDsRoleQuery req)
+        public async Task<ListDsRoleView> ListDsRoleQuery(ListDsRoleQuery req)
         {
-            var model = await _httpClient.CustomPostAsync<BDataSourceResult<ListDsRoleView>>($"{ApiUrl}/{ApiClient.ListDsRole}", req);
+            var model = await _httpClient.CustomPostAsync<ListDsRoleView>($"{ApiUrl}/{ApiClient.ListDsRole}", req);
             return model;
         }
 

@@ -1,7 +1,4 @@
-using Bentas.O2.Core;
-using Bentas.O2.Core.Interfaces;
-using Bentas.O2.TagHelpers;
-using Bentas.O2.WebExtensions.Services;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,8 +17,8 @@ builder.Services.AddSession();
 
 //Kendo için Json Formatýnýn AddNewtonJson olduðu belirtilir
 //AddRazorRuntimeCompilation() html tarafýnda bir deðiþiklikte F5 ile direkt renderlanmasýný ve ekranda gösterilmesini saðlar
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
-builder.Services.AddKendo();
+builder.Services.AddControllersWithViews();/*.AddRazorRuntimeCompilation().AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());*/
+
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -43,7 +40,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUrlShortService, UrlShortService>();
-builder.Services.AddSingleton<IJsonHelper, JsonNetHelper>();
+//builder.Services.AddSingleton<IJsonHelper, JsonNetHelper>();
 
 
 //Türkçe desteði için kullanýlýr

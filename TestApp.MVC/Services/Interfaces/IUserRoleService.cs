@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.Commands;
@@ -13,7 +13,7 @@ namespace TestApp.MVC.Services.Interfaces
         Task<ServiceResult<Unit>> DeleteUserRole(int Id, DeleteUserRoleCommand req);
         Task<ServiceResult<UserRoleDto>> UpdateUserRole(int Id, UpdateUserRoleCommand req);
         Task<ServiceResult<UserRoleDto>> GetUserRoleById(GetUserRoleByIdQuery req);
-        Task<BDataSourceResult<ListDsUserRoleView>> ListDsUserRoleQuery(ListDsUserRoleQuery req);
+        //Task<BDataSourceResult<ListDsUserRoleView>> ListDsUserRoleQuery(ListDsUserRoleQuery req);
         Task<ServiceResult<List<UserRoleDto>>> GetAllUserRoles(GetAllUserRolesQuery req);
     }
 }

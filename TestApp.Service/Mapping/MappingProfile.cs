@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bentas.O2.DynamicLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

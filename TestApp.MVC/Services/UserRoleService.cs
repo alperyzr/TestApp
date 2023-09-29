@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UserRoles.Commands;
@@ -45,11 +45,11 @@ namespace TestApp.MVC.Services
             return model;
         }
 
-        public async Task<BDataSourceResult<ListDsUserRoleView>> ListDsUserRoleQuery(ListDsUserRoleQuery req)
-        {
-            var model = await _httpClient.CustomPostAsync<BDataSourceResult<ListDsUserRoleView>>($"{ApiUrl}/{ApiClient.ListDsUserRole}", req);
-            return model;
-        }
+        //public async Task<BDataSourceResult<ListDsUserRoleView>> ListDsUserRoleQuery(ListDsUserRoleQuery req)
+        //{
+        //    var model = await _httpClient.CustomPostAsync<BDataSourceResult<ListDsUserRoleView>>($"{ApiUrl}/{ApiClient.ListDsUserRole}", req);
+        //    return model;
+        //}
 
         public async Task<ServiceResult<UserRoleDto>> UpdateUserRole(int Id, UpdateUserRoleCommand req)
         {

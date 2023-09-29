@@ -7,14 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bentas.O2.Builder.Mvc.Module" Version="6.0.150" />
-    <PackageReference Include="Bentas.O2.Core.Events" Version="6.0.151" />
-    <PackageReference Include="Bentas.O2.DynamicLinq" Version="6.0.150" />
-    <PackageReference Include="Bentas.O2.SiteCore" Version="2.0.354" />
-    <PackageReference Include="Bentas.O2.TagHelpers" Version="6.0.150" />
-    <PackageReference Include="Bentas.O2.WebExtensions" Version="6.0.150" />
+  
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2022.3.1109" />
+   
   </ItemGroup>
 
   <ItemGroup>

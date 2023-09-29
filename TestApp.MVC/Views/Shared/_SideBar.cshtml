@@ -1,6 +1,6 @@
-﻿@using Kendo.Mvc.UI;
+﻿
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@addTagHelper *, Kendo.Mvc
+
 @{
     var CookieUserKey = HttpContextAccessor.HttpContext.Request.Cookies["UserKey"];
 }

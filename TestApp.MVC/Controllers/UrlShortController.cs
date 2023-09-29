@@ -5,11 +5,11 @@ using TestApp.Core.Application.UrlShorts.Commands;
 using TestApp.Core.Application.UserRoles.ViewModels;
 using TestApp.Core.Application.Users.Queries;
 using Microsoft.AspNetCore.Authorization;
-using Kendo.Mvc.UI;
+
 using TestApp.Core.Application.Users.ViewModels;
-using Bentas.O2.Core.Interfaces;
+
 using TestApp.Core.Application.UrlShorts.ViewModels;
-using Bentas.O2.DynamicLinq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TestApp.MVC.Controllers
 {
@@ -37,16 +37,16 @@ namespace TestApp.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UrlShortFilterView filterView)
-        {
-            var filter = _jsonHelper.Deserialize<ListDsUrlShortQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
-            filter.FilterView = filterView;
+        //[HttpPost]
+        //public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UrlShortFilterView filterView)
+        //{
+        //    var filter = _jsonHelper.Deserialize<ListDsUrlShortQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+        //    filter.FilterView = filterView;
 
-            var response = await _urlShortService.ListDsUrlShortQuery(filter);
+        //    var response = await _urlShortService.ListDsUrlShortQuery(filter);
 
-            return Json(response);
-        }
+        //    return Json(response);
+        //}
 
 
         [HttpGet]        

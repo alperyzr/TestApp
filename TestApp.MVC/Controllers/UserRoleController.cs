@@ -1,8 +1,7 @@
-﻿using Bentas.O2.Core.Interfaces;
-using Bentas.O2.DynamicLinq;
-using Kendo.Mvc.UI;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TestApp.Core.Application.Roles.Queries;
 using TestApp.Core.Application.UserRoles.Commands;
 using TestApp.Core.Application.UserRoles.Queries;
@@ -39,16 +38,16 @@ namespace TestApp.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UserRoleFilterView filterView)
-        {
-            var filter = _jsonHelper.Deserialize<ListDsUserRoleQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
-            filter.FilterView = filterView;
+        //[HttpPost]
+        //public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UserRoleFilterView filterView)
+        //{
+        //    var filter = _jsonHelper.Deserialize<ListDsUserRoleQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+        //    filter.FilterView = filterView;
 
-            var response = await _userRoleService.ListDsUserRoleQuery(filter);
+        //    var response = await _userRoleService.ListDsUserRoleQuery(filter);
 
-            return Json(response);
-        }
+        //    return Json(response);
+        //}
 
 
         [HttpGet]        

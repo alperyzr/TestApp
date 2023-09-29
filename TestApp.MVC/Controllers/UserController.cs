@@ -1,7 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
-using Kendo.Mvc.Infrastructure;
-using Kendo.Mvc;
-using Kendo.Mvc.UI;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +10,6 @@ using TestApp.Core.Application.Users.ViewModels;
 using TestApp.MVC.Filters;
 using TestApp.MVC.Services;
 using TestApp.MVC.Services.Interfaces;
-using Kendo.Mvc.Extensions;
 using TestApp.Repository;
 using System.Collections;
 
@@ -23,13 +19,14 @@ namespace TestApp.MVC.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly Bentas.O2.Core.Interfaces.IJsonHelper _jsonHelper;
+        
         private readonly AppDbContext _appDbContext;
 
-        public UserController(IUserService userService, Bentas.O2.Core.Interfaces.IJsonHelper jsonHelper, AppDbContext appDbContext)
+        public UserController(IUserService userService, AppDbContext appDbContext)
         {
             _userService = userService;
-            _jsonHelper = jsonHelper;
+           
+
             _appDbContext = appDbContext;
         }
 
@@ -41,16 +38,16 @@ namespace TestApp.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UserFilterView filterView)
-        {
-            var filter = _jsonHelper.Deserialize<ListDsUserQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
-            filter.FilterView = filterView;
+        //[HttpPost]
+        //public async Task<IActionResult> ListDs([DataSourceRequest] DataSourceRequest request, UserFilterView filterView)
+        //{
+        //    var filter = _jsonHelper.Deserialize<ListDsUserQuery>(_jsonHelper.Serialize(request.ToBDatasourceRequest()));
+        //    filter.FilterView = filterView;
 
-            var response = await _userService.ListDsUserQuery(filter);
+        //    var response = await _userService.ListDsUserQuery(filter);
 
-            return Json(response);
-        }
+        //    return Json(response);
+        //}
 
 
         [HttpGet]

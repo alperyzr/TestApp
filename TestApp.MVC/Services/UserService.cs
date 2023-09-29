@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.Users.Commands;
@@ -43,9 +43,9 @@ namespace TestApp.MVC.Services
             return model;
         }
 
-        public async Task<BDataSourceResult<ListDsUserView>> ListDsUserQuery(ListDsUserQuery req)
+        public async Task<ListDsUserView> ListDsUserQuery(ListDsUserQuery req)
         {
-            var model = await _httpClient.CustomPostAsync<BDataSourceResult<ListDsUserView>>($"{ApiUrl}/{ApiClient.ListDsUser}", req);
+            var model = await _httpClient.CustomPostAsync<ListDsUserView>($"{ApiUrl}/{ApiClient.ListDsUser}", req);
             return model;
         }
 

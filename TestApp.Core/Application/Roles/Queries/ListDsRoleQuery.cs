@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using TestApp.Core.Application.Roles.ViewModels;
 
 namespace TestApp.Core.Application.Roles.Queries
 {
-    public class ListDsRoleQuery : BDataSourceRequest, IRequest<BDataSourceResult<ListDsRoleView>>
+    public class ListDsRoleQuery :  IRequest<ListDsRoleView>
     {
         public RoleFilterView FilterView { get; set; } = new RoleFilterView();
     }

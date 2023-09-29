@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.UrlShorts.Commands;
@@ -13,7 +13,7 @@ namespace TestApp.MVC.Services.Interfaces
         Task<ServiceResult<Unit>> DeleteUrlShort(int Id, DeleteUrlShortCommand req);
         Task<ServiceResult<UrlShortDto>> UpdateUrlShort(int Id, UpdateUrlShortCommand req);
         Task<ServiceResult<UrlShortDto>> GetUrlShortById(GetUrlShortByIdQuery req);
-        Task<BDataSourceResult<ListDsUrlShortView>> ListDsUrlShortQuery(ListDsUrlShortQuery req);
+        //Task<BDataSourceResult<ListDsUrlShortView>> ListDsUrlShortQuery(ListDsUrlShortQuery req);
         Task<ServiceResult<List<UrlShortDto>>> GetAllUrlShorts(GetAllUrlShortsQuery req);
         Task<ServiceResult<UrlShortDto>> GetUrlShortInfoByShortUrl(GetUrlShortInfoByShortUrlQuery req);
     }

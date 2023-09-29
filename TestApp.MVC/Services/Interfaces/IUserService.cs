@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using TestApp.Core.Application;
 using TestApp.Core.Application.Users.Commands;
@@ -13,7 +13,7 @@ namespace TestApp.MVC.Services.Interfaces
         Task<ServiceResult<Unit>> DeleteUser(int Id, DeleteUserCommand req);
         Task<ServiceResult<UserDto>> UpdateUser(int Id, UpdateUserCommand req);
         Task<ServiceResult<UserDto>> GetUserById(GetUserByIdQuery req);
-        Task<BDataSourceResult<ListDsUserView>> ListDsUserQuery(ListDsUserQuery req);
+        //Task<BDataSourceResult<ListDsUserView>> ListDsUserQuery(ListDsUserQuery req);
         Task<ServiceResult<List<UserDto>>> GetAllUser(GetAllUsersQuery req);
     }
 }

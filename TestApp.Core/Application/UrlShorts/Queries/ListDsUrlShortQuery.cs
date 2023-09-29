@@ -1,4 +1,4 @@
-﻿using Bentas.O2.DynamicLinq;
+﻿
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using TestApp.Core.Application.UrlShorts.ViewModels;
 
 namespace TestApp.Core.Application.UrlShorts.Queries
 {
-    public class ListDsUrlShortQuery : BDataSourceRequest, IRequest<BDataSourceResult<ListDsUrlShortView>>
+    public class ListDsUrlShortQuery : IRequest<ListDsUrlShortView>
     {
         public UrlShortFilterView FilterView { get; set; } = new UrlShortFilterView();
     }
